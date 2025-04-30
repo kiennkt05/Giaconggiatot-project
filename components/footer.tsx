@@ -16,11 +16,11 @@ export function Footer() {
               <div>
                 <div className="flex flex-col space-y-2">
                   <Link href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
-                    <Image src="/images/app-store.png" alt="App Store" width={120} height={40} className="rounded" />
+                    <Image src="https://static.chotot.com/storage/default/ios.svg" alt="App Store" width={120} height={40} className="rounded" />
                   </Link>
                   <Link href="https://play.google.com" target="_blank" rel="noopener noreferrer">
                     <Image
-                      src="/images/google-play.png"
+                      src="https://static.chotot.com/storage/default/android.svg"
                       alt="Google Play"
                       width={120}
                       height={40}
@@ -96,19 +96,19 @@ export function Footer() {
             <h3 className="font-bold text-gray-700 mb-4">Liên kết</h3>
             <div className="flex space-x-4 mb-6">
               <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <Image src="/images/facebook.svg" alt="Facebook" width={32} height={32} />
+                <Image src="https://static.chotot.com/storage/default/facebook.svg" alt="Facebook" width={32} height={32} />
               </Link>
               <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                <Image src="/images/youtube.svg" alt="Youtube" width={32} height={32} />
+                <Image src="https://static.chotot.com/storage/default/youtube.svg" alt="Youtube" width={32} height={32} />
               </Link>
               <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                <Image src="/images/linkedin.svg" alt="LinkedIn" width={32} height={32} />
+                <Image src="https://static.chotot.com/storage/default/linkedin.svg" alt="LinkedIn" width={32} height={32} />
               </Link>
             </div>
 
             <h3 className="font-bold text-gray-700 mb-4">Chứng nhận</h3>
             <Link href="http://online.gov.vn" target="_blank" rel="noopener noreferrer">
-              <Image src="/images/certification.png" alt="Certification" width={130} height={40} />
+              <Image src="https://static.chotot.com/storage/default/certificate.webp" alt="Certification" width={130} height={40} />
             </Link>
           </div>
         </div>
