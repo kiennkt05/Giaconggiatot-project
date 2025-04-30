@@ -103,6 +103,7 @@ export default function Home() {
         </div>
 
         {/* Quick links */}
+        {/*
         <div className="bg-white py-4 border-b">
           <div className="container mx-auto px-4">
             <div className="flex overflow-x-auto space-x-4 pb-2">
@@ -125,7 +126,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-
+        */}
         {/* Categories */}
         <CategorySection />
 
