@@ -17,18 +17,6 @@ export function Header() {
       {/* Top navigation bar */}
       <div className="container mx-auto px-4 py-1 border-b hidden md:flex justify-between text-sm text-gray-600">
         <div className="flex space-x-4">
-          <Link href="/" className="hover:text-orange-500">
-            Chợ Tốt
-          </Link>
-          <Link href="/nha-tot" className="hover:text-orange-500">
-            Nhà Tốt
-          </Link>
-          <Link href="/xe-tot" className="hover:text-orange-500">
-            Xe Tốt
-          </Link>
-          <Link href="/viec-lam-tot" className="hover:text-orange-500">
-            Việc Làm Tốt
-          </Link>
         </div>
         <div className="flex space-x-4">
           <Link href="/tai-app" className="hover:text-orange-500">
