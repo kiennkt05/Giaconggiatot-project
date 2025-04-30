@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { ProductCard } from "@/components/product-card"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { CategorySection } from "@/components/category-section"
+import { InfoBox } from "@/components/info-box"
 
 export default function Home() {
   const products = [
@@ -87,13 +88,54 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1">
-        <section className="container mx-auto px-4 py-8">
-          <div className="mb-8">
-            <div className="flex w-full max-w-sm items-center space-x-2 mx-auto">
-              <Input type="text" placeholder="Tìm kiếm" className="pl-3" />
-              <Button type="submit">Tìm kiếm</Button>
+      <main className="flex-1 bg-gray-100">
+        {/* Banner slider */}
+        <div className="bg-white py-4">
+          <div className="container mx-auto px-4">
+            <div className="relative h-[180px] md:h-[235px] rounded-lg overflow-hidden">
+              <img
+                src="https://cdn.chotot.com/admincentre/lyUqIZB2GKoglbY3y2kcnfSYwmxJCgfow6yBZ474mco/preset:raw/plain/40cbae95b36176c6785a88467e252b75-2928430618505531480.jpg"
+                alt="Banner"
+                className="w-full h-full object-cover"
+              />
             </div>
+          </div>
+        </div>
+
+        {/* Quick links */}
+        <div className="bg-white py-4 border-b">
+          <div className="container mx-auto px-4">
+            <div className="flex overflow-x-auto space-x-4 pb-2">
+              {[
+                { name: "Nạp Đồng Tốt", icon: "💰" },
+                { name: "Gói Pro", icon: "⭐" },
+                { name: "Thu mua ô tô", icon: "🚗" },
+                { name: "Đặt xe chính hãng", icon: "🏍️" },
+                { name: "Thu mua xe máy", icon: "🛵" },
+                { name: "Tin đăng đã lưu", icon: "❤️" },
+                { name: "Đăng tin cho tặng", icon: "🎁" },
+              ].map((item, index) => (
+                <div key={index} className="flex-shrink-0 text-center">
+                  <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <span className="text-xl">{item.icon}</span>
+                  </div>
+                  <span className="text-xs whitespace-nowrap">{item.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Categories */}
+        <CategorySection />
+
+        {/* Product listings */}
+        <section className="container mx-auto px-4 py-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold">Tin đăng mới nhất</h2>
+            <Button variant="link" className="text-orange-500">
+              Xem tất cả
+            </Button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -114,10 +156,13 @@ export default function Home() {
 
           <div className="flex justify-center mt-8">
             <Button variant="outline" className="rounded-full px-8">
-              More...
+              Xem thêm
             </Button>
           </div>
         </section>
+
+        {/* Info box */}
+        <InfoBox />
       </main>
 
       <Footer />
