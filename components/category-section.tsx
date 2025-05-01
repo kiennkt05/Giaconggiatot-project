@@ -1,5 +1,11 @@
+"use client"
+
+import type React from "react"
+
 import Image from "next/image"
 import Link from "next/link"
+import { useFeatureNotification } from "@/hooks/use-feature-notification"
+import { FeatureNotification } from "@/components/feature-notification"
 
 const categories = [
   {
@@ -53,6 +59,16 @@ const categories = [
 ]
 
 export function CategorySection() {
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
+
+  const handleCategoryClick = (e: React.MouseEvent, category: (typeof categories)[0]) => {
+    // Only show notification for categories that aren't implemented yet
+    if (category.url !== "/kham-pha") {
+      e.preventDefault()
+      showFeatureNotification()
+    }
+  }
+
   return (
     <div className="bg-white py-4">
       <div className="container mx-auto px-4">
@@ -63,6 +79,7 @@ export function CategorySection() {
               key={category.id}
               href={category.url}
               className="flex flex-col items-center justify-center text-center hover:text-orange-500 transition-colors"
+              onClick={(e) => handleCategoryClick(e, category)}
             >
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-2">
                 <Image
@@ -78,6 +95,7 @@ export function CategorySection() {
           ))}
         </div>
       </div>
+      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </div>
   )
 }

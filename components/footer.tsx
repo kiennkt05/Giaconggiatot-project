@@ -1,7 +1,20 @@
+"use client"
+
+import type React from "react"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useFeatureNotification } from "@/hooks/use-feature-notification"
+import { FeatureNotification } from "@/components/feature-notification"
 
 export function Footer() {
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    showFeatureNotification()
+  }
+
   return (
     <footer className="bg-white border-t">
       <div className="container mx-auto px-4 py-8">
@@ -15,10 +28,16 @@ export function Footer() {
               </div>
               <div>
                 <div className="flex flex-col space-y-2">
-                  <Link href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
-                    <Image src="https://static.chotot.com/storage/default/ios.svg" alt="App Store" width={120} height={40} className="rounded" />
+                  <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+                    <Image
+                      src="https://static.chotot.com/storage/default/ios.svg"
+                      alt="App Store"
+                      width={120}
+                      height={40}
+                      className="rounded"
+                    />
                   </Link>
-                  <Link href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+                  <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
                     <Image
                       src="https://static.chotot.com/storage/default/android.svg"
                       alt="Google Play"
@@ -37,17 +56,17 @@ export function Footer() {
             <h3 className="font-bold text-gray-700 mb-4">Hỗ trợ khách hàng</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/tro-giup" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Trung tâm trợ giúp
                 </Link>
               </li>
               <li>
-                <Link href="/an-toan" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   An toàn mua bán
                 </Link>
               </li>
               <li>
-                <Link href="/lien-he" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Liên hệ hỗ trợ
                 </Link>
               </li>
@@ -59,32 +78,32 @@ export function Footer() {
             <h3 className="font-bold text-gray-700 mb-4">VỀ GIACONGGIATOT</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/gioi-thieu" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Giới thiệu
                 </Link>
               </li>
               <li>
-                <Link href="/quy-che" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Quy chế hoạt động sàn
                 </Link>
               </li>
               <li>
-                <Link href="/chinh-sach" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Chính sách bảo mật
                 </Link>
               </li>
               <li>
-                <Link href="/giai-quyet-tranh-chap" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Giải quyết tranh chấp
                 </Link>
               </li>
               <li>
-                <Link href="/tuyen-dung" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Tuyển dụng
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
                   Blog
                 </Link>
               </li>
@@ -95,20 +114,40 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-gray-700 mb-4">Liên kết</h3>
             <div className="flex space-x-4 mb-6">
-              <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <Image src="https://static.chotot.com/storage/default/facebook.svg" alt="Facebook" width={32} height={32} />
+              <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src="https://static.chotot.com/storage/default/facebook.svg"
+                  alt="Facebook"
+                  width={32}
+                  height={32}
+                />
               </Link>
-              <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                <Image src="https://static.chotot.com/storage/default/youtube.svg" alt="Youtube" width={32} height={32} />
+              <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src="https://static.chotot.com/storage/default/youtube.svg"
+                  alt="Youtube"
+                  width={32}
+                  height={32}
+                />
               </Link>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                <Image src="https://static.chotot.com/storage/default/linkedin.svg" alt="LinkedIn" width={32} height={32} />
+              <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src="https://static.chotot.com/storage/default/linkedin.svg"
+                  alt="LinkedIn"
+                  width={32}
+                  height={32}
+                />
               </Link>
             </div>
 
             <h3 className="font-bold text-gray-700 mb-4">Chứng nhận</h3>
-            <Link href="http://online.gov.vn" target="_blank" rel="noopener noreferrer">
-              <Image src="https://static.chotot.com/storage/default/certificate.webp" alt="Certification" width={130} height={40} />
+            <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+              <Image
+                src="https://static.chotot.com/storage/default/certificate.webp"
+                alt="Certification"
+                width={130}
+                height={40}
+              />
             </Link>
           </div>
         </div>
@@ -126,6 +165,7 @@ export function Footer() {
           </p>
         </div>
       </div>
+      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </footer>
   )
 }

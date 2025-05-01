@@ -1,11 +1,14 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Heart, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { useFeatureNotification } from "@/hooks/use-feature-notification"
+import { FeatureNotification } from "@/components/feature-notification"
 
 interface FavoriteItem {
   id: number
@@ -74,12 +77,23 @@ export function FavoriteTab() {
     },
   ])
 
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
+
   const toggleOpen = () => {
     setIsOpen(!isOpen)
   }
 
-  const removeFromFavorites = (id: number) => {
-    setFavorites(favorites.filter((item) => item.id !== id))
+  const removeFromFavorites = (id: number, e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    showFeatureNotification()
+    // Original functionality commented out
+    // setFavorites(favorites.filter((item) => item.id !== id))
+  }
+
+  const handleItemClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    showFeatureNotification()
   }
 
   // Group favorites by supplier
@@ -119,26 +133,26 @@ export function FavoriteTab() {
                       <div key={item.id} className="p-3 border-b last:border-0">
                         <div className="flex space-x-3">
                           <div className="relative h-16 w-16 flex-shrink-0">
-                            <Link href={`/products/${item.id}`}>
+                            <a href="#" onClick={handleItemClick}>
                               <Image
                                 src={item.image || "/placeholder.svg"}
                                 alt={item.title}
                                 fill
                                 className="object-cover rounded"
                               />
-                            </Link>
+                            </a>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <Link href={`/products/${item.id}`} className="hover:text-orange-500">
+                            <a href="#" onClick={handleItemClick} className="hover:text-orange-500">
                               <h5 className="text-sm font-medium line-clamp-2">{item.title}</h5>
-                            </Link>
+                            </a>
                             <p className="text-xs text-orange-500 font-bold mt-1">{item.price}</p>
                           </div>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="h-8 w-8 text-gray-400 hover:text-red-500"
-                            onClick={() => removeFromFavorites(item.id)}
+                            onClick={(e) => removeFromFavorites(item.id, e)}
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -154,6 +168,7 @@ export function FavoriteTab() {
           </ScrollArea>
         </div>
       )}
+      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </div>
   )
 }

@@ -1,4 +1,19 @@
+"use client"
+
+import type React from "react"
+
+import { useFeatureNotification } from "@/hooks/use-feature-notification"
+import { FeatureNotification } from "@/components/feature-notification"
+import Link from "next/link"
+
 export function InfoBox() {
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    showFeatureNotification()
+  }
+
   return (
     <div className="bg-white py-8">
       <div className="container mx-auto px-4">
@@ -15,8 +30,35 @@ export function InfoBox() {
 
           <p>
             Đến nay, GiaCongGiaTot tự hào là Website rao vặt được ưa chuộng hàng đầu Việt Nam cho các sản phẩm thủ công
-            mỹ nghệ. Hàng ngàn món hời từ Lan can bằng sắt, Túi đan bằng tre, Đan len quần áo, Bình lọ gốm, Sản phẩm tre
-            nứa, Đồ sứ cao cấp, Điêu khắc gỗ và nhiều sản phẩm thủ công khác được đăng tin, rao bán trên GiaCongGiaTot.
+            mỹ nghệ. Hàng ngàn món hời từ{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Lan can bằng sắt
+            </Link>
+            ,{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Túi đan bằng tre
+            </Link>
+            ,{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Đan len quần áo
+            </Link>
+            ,{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Bình lọ gốm
+            </Link>
+            ,{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Sản phẩm tre nứa
+            </Link>
+            ,{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Đồ sứ cao cấp
+            </Link>
+            ,{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Điêu khắc gỗ
+            </Link>{" "}
+            và nhiều sản phẩm thủ công khác được đăng tin, rao bán trên GiaCongGiaTot.
           </p>
 
           <p>
@@ -27,13 +69,17 @@ export function InfoBox() {
           <p>
             Mỗi người trong chúng ta đều có những sản phẩm đã qua sử dụng và không cần dùng tới nữa. Vậy còn chần chừ gì
             nữa mà không để nó trở nên giá trị hơn với người khác. Rất đơn giản, bạn chỉ cần chụp hình lại, mô tả cụ thể
-            về sản phẩm và sử dụng ứng dụng Đăng tin miễn phí của GiaCongGiaTot là đã có thể đến gần hơn với người cần
-            nó.
+            về sản phẩm và sử dụng ứng dụng{" "}
+            <Link href="#" onClick={handleLinkClick}>
+              Đăng tin miễn phí
+            </Link>{" "}
+            của GiaCongGiaTot là đã có thể đến gần hơn với người cần nó.
           </p>
 
           <p>Chúc các bạn có những trải nghiệm mua bán tuyệt vời trên GiaCongGiaTot.</p>
         </div>
       </div>
+      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </div>
   )
 }

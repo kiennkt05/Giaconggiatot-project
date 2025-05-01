@@ -1,17 +1,25 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Search, MessageSquare, User } from "lucide-react"
 import { LocationDropdown } from "@/components/location-dropdown"
 import { NotificationTab } from "@/components/notification-tab"
 import { FavoriteTab } from "@/components/favorite-tab"
 import { ShoppingTab } from "@/components/shopping-tab"
+import { useFeatureNotification } from "@/hooks/use-feature-notification"
+import { FeatureNotification } from "@/components/feature-notification"
 
+// Update the Header component to use usePathname
 export function Header() {
   const [selectedCity, setSelectedCity] = useState("Toàn Quốc")
+  const pathname = usePathname()
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
 
   const cities = [
     "Toàn Quốc",
@@ -51,21 +59,26 @@ export function Header() {
     "Đồng Tháp",
   ]
 
+  const handleUtilityLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    showFeatureNotification()
+  }
+
   return (
     <header className="border-b sticky top-0 bg-white z-40">
       {/* Top navigation bar */}
       <div className="container mx-auto px-4 py-1 border-b hidden md:flex justify-between text-sm text-gray-600">
         <div className="flex space-x-4"></div>
         <div className="flex space-x-4">
-          <Link href="/" className="hover:text-orange-500">
+          <a href="#" onClick={handleUtilityLinkClick} className="hover:text-orange-500">
             Tải ứng dụng
-          </Link>
-          <Link href="/" className="hover:text-orange-500">
+          </a>
+          <a href="#" onClick={handleUtilityLinkClick} className="hover:text-orange-500">
             Trợ giúp
-          </Link>
-          <Link href="/" className="hover:text-orange-500">
+          </a>
+          <a href="#" onClick={handleUtilityLinkClick} className="hover:text-orange-500">
             Đóng góp ý kiến
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -91,8 +104,17 @@ export function Header() {
                 type="text"
                 placeholder="Tìm kiếm trên GiaCongGiaTot"
                 className="w-full rounded-md border border-input bg-background px-3 py-2 pl-10 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault()
+                    showFeatureNotification()
+                  }
+                }}
               />
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Search
+                className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground cursor-pointer"
+                onClick={showFeatureNotification}
+              />
             </div>
           </div>
 
@@ -124,22 +146,31 @@ export function Header() {
           </div>
         </div>
 
-        {/* Category navigation */}
+        {/* Category navigation - Update to highlight active link */}
         <nav className="flex space-x-6 py-2 overflow-x-auto scrollbar-hide">
           <Link
             href="/"
-            className="text-sm font-medium py-2 border-b-2 border-orange-500 text-orange-500 whitespace-nowrap"
+            className={`text-sm font-medium py-2 border-b-2 ${
+              pathname === "/"
+                ? "border-orange-500 text-orange-500"
+                : "border-transparent hover:border-orange-500 hover:text-orange-500"
+            } transition-colors whitespace-nowrap`}
           >
             Trang chủ
           </Link>
           <Link
             href="/kham-pha"
-            className="text-sm font-medium py-2 border-b-2 border-transparent hover:border-orange-500 hover:text-orange-500 transition-colors whitespace-nowrap"
+            className={`text-sm font-medium py-2 border-b-2 ${
+              pathname === "/kham-pha"
+                ? "border-orange-500 text-orange-500"
+                : "border-transparent hover:border-orange-500 hover:text-orange-500"
+            } transition-colors whitespace-nowrap`}
           >
             Khám phá
           </Link>
         </nav>
       </div>
+      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </header>
   )
 }

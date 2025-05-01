@@ -1,9 +1,13 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Bell, Check, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { useFeatureNotification } from "@/hooks/use-feature-notification"
+import { FeatureNotification } from "@/components/feature-notification"
 
 interface Notification {
   id: string
@@ -75,18 +79,32 @@ export function NotificationTab() {
     },
   ])
 
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
+
   const toggleOpen = () => {
     setIsOpen(!isOpen)
   }
 
-  const markAsRead = (id: string) => {
-    setNotifications(
-      notifications.map((notification) => (notification.id === id ? { ...notification, read: true } : notification)),
-    )
+  const markAsRead = (id: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    showFeatureNotification()
+    // Original functionality commented out
+    // setNotifications(
+    //   notifications.map((notification) => (notification.id === id ? { ...notification, read: true } : notification)),
+    // )
   }
 
-  const markAllAsRead = () => {
-    setNotifications(notifications.map((notification) => ({ ...notification, read: true })))
+  const markAllAsRead = (e: React.MouseEvent) => {
+    e.preventDefault()
+    showFeatureNotification()
+    // Original functionality commented out
+    // setNotifications(notifications.map((notification) => ({ ...notification, read: true })))
+  }
+
+  const handleNotificationClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    showFeatureNotification()
   }
 
   const unreadCount = notifications.filter((notification) => !notification.read).length
@@ -117,7 +135,8 @@ export function NotificationTab() {
                 notifications.map((notification) => (
                   <div
                     key={notification.id}
-                    className={`p-3 border-b last:border-0 ${notification.read ? "bg-white" : "bg-orange-50"}`}
+                    className={`p-3 border-b last:border-0 ${notification.read ? "bg-white" : "bg-orange-50"} cursor-pointer`}
+                    onClick={handleNotificationClick}
                   >
                     <div className="flex justify-between">
                       <h4 className="text-sm font-medium">{notification.title}</h4>
@@ -125,7 +144,7 @@ export function NotificationTab() {
                         variant="ghost"
                         size="icon"
                         className="h-5 w-5"
-                        onClick={() => markAsRead(notification.id)}
+                        onClick={(e) => markAsRead(notification.id, e)}
                       >
                         {notification.read ? (
                           <X className="h-3 w-3 text-gray-400" />
@@ -166,6 +185,7 @@ export function NotificationTab() {
           </ScrollArea>
         </div>
       )}
+      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </div>
   )
 }

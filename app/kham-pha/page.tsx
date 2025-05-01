@@ -11,7 +11,7 @@ import { InfoBox } from "@/components/info-box"
 import { useFeatureNotification } from "@/hooks/use-feature-notification"
 import { FeatureNotification } from "@/components/feature-notification"
 
-export default function Home() {
+export default function KhamPha() {
   const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
 
   const products = [
