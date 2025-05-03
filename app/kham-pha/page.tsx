@@ -103,7 +103,7 @@ export default function KhamPha() {
       <Header />
 
       <main className="flex-1 bg-gray-100">
-        {/* Banner slider */}
+{/*         {/* Banner slider */}
         <div className="explore-banner-section bg-white py-4">
           <div className="container mx-auto px-4">
             <BannerSlider />
@@ -112,7 +112,7 @@ export default function KhamPha() {
 
         {/* Categories */}
         <CategorySection />
-
+ */}
         {/* Product listings */}
         <section className="container mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-6">
