@@ -10,6 +10,7 @@ import { CategorySection } from "@/components/category-section"
 import { InfoBox } from "@/components/info-box"
 import { useFeatureNotification } from "@/hooks/use-feature-notification"
 import { FeatureNotification } from "@/components/feature-notification"
+import { BannerSlider } from "@/components/banner-slider"
 
 export default function KhamPha() {
   const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
@@ -103,15 +104,9 @@ export default function KhamPha() {
 
       <main className="flex-1 bg-gray-100">
         {/* Banner slider */}
-        <div className="bg-white py-4">
+        <div className="explore-banner-section bg-white py-4">
           <div className="container mx-auto px-4">
-            <div className="relative h-[180px] md:h-[235px] rounded-lg overflow-hidden">
-              <img
-                src="https://cdn.chotot.com/admincentre/lyUqIZB2GKoglbY3y2kcnfSYwmxJCgfow6yBZ474mco/preset:raw/plain/40cbae95b36176c6785a88467e252b75-2928430618505531480.jpg"
-                alt="Banner"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <BannerSlider />
           </div>
         </div>
 

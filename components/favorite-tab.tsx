@@ -107,51 +107,51 @@ export function FavoriteTab() {
   }, {})
 
   return (
-    <div className="relative">
-      <Button variant="ghost" size="icon" className="text-gray-600 relative" onClick={toggleOpen}>
-        <Heart className="h-5 w-5" />
+    <div className="favorite-tab-container relative">
+      <Button variant="ghost" size="icon" className="favorite-tab-button text-gray-600 relative" onClick={toggleOpen}>
+        <Heart className="favorite-icon h-5 w-5" />
         {favorites.length > 0 && (
-          <span className="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">
+          <span className="favorite-count absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">
             {favorites.length}
           </span>
         )}
       </Button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-          <div className="flex justify-between items-center p-3 border-b">
-            <h3 className="font-medium">Sản phẩm yêu thích</h3>
+        <div className="favorite-dropdown absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-50 border border-gray-200">
+          <div className="favorite-header flex justify-between items-center p-3 border-b">
+            <h3 className="favorite-title font-medium">Sản phẩm yêu thích</h3>
           </div>
 
-          <ScrollArea className="h-80">
-            <div className="p-2">
+          <ScrollArea className="favorite-items-container h-80">
+            <div className="favorite-items p-2">
               {Object.keys(groupedFavorites).length > 0 ? (
                 Object.entries(groupedFavorites).map(([supplierName, items]) => (
-                  <div key={supplierName} className="mb-4">
-                    <h4 className="text-sm font-medium px-3 py-1 bg-gray-50">{supplierName}</h4>
+                  <div key={supplierName} className="favorite-supplier-group mb-4">
+                    <h4 className="favorite-supplier-name text-sm font-medium px-3 py-1 bg-gray-50">{supplierName}</h4>
                     {items.map((item) => (
-                      <div key={item.id} className="p-3 border-b last:border-0">
-                        <div className="flex space-x-3">
-                          <div className="relative h-16 w-16 flex-shrink-0">
+                      <div key={item.id} className="favorite-item p-3 border-b last:border-0">
+                        <div className="favorite-item-content flex space-x-3">
+                          <div className="favorite-item-image-container relative h-16 w-16 flex-shrink-0">
                             <a href="#" onClick={handleItemClick}>
                               <Image
                                 src={item.image || "/placeholder.svg"}
                                 alt={item.title}
                                 fill
-                                className="object-cover rounded"
+                                className="favorite-item-image object-cover rounded"
                               />
                             </a>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <a href="#" onClick={handleItemClick} className="hover:text-orange-500">
-                              <h5 className="text-sm font-medium line-clamp-2">{item.title}</h5>
+                          <div className="favorite-item-details flex-1 min-w-0">
+                            <a href="#" onClick={handleItemClick} className="favorite-item-link hover:text-orange-500">
+                              <h5 className="favorite-item-title text-sm font-medium line-clamp-2">{item.title}</h5>
                             </a>
-                            <p className="text-xs text-orange-500 font-bold mt-1">{item.price}</p>
+                            <p className="favorite-item-price text-xs text-orange-500 font-bold mt-1">{item.price}</p>
                           </div>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-gray-400 hover:text-red-500"
+                            className="favorite-remove-button h-8 w-8 text-gray-400 hover:text-red-500"
                             onClick={(e) => removeFromFavorites(item.id, e)}
                           >
                             <Trash2 className="h-4 w-4" />
@@ -162,7 +162,7 @@ export function FavoriteTab() {
                   </div>
                 ))
               ) : (
-                <div className="p-4 text-center text-gray-500">Chưa có sản phẩm yêu thích</div>
+                <div className="favorite-empty-state p-4 text-center text-gray-500">Chưa có sản phẩm yêu thích</div>
               )}
             </div>
           </ScrollArea>

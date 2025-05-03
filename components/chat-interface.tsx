@@ -2,12 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Send, Search, Phone, Info, MoreVertical, Paperclip, ImageIcon, Smile } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { useSearchParams } from "next/navigation"
+import { getProductById } from "@/services/product-service"
 
 interface Contact {
   id: string
@@ -104,6 +106,37 @@ export function ChatInterface() {
   const [newMessage, setNewMessage] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
 
+  const searchParams = useSearchParams()
+  const supplierParam = searchParams.get("supplier")
+  const productId = searchParams.get("id")
+
+  // If a supplier is specified in the URL, select that contact
+  useEffect(() => {
+    if (supplierParam) {
+      // Find the supplier by name
+      const supplierContact = contacts.find((contact) => contact.name === supplierParam)
+
+      if (supplierContact) {
+        setSelectedContact(supplierContact)
+
+        // If we have a product ID, add a message about the product
+        if (productId) {
+          const product = getProductById(productId)
+          if (product) {
+            const newMessage: Message = {
+              id: Date.now().toString(),
+              text: `Xin chào, tôi muốn hỏi về sản phẩm "${product.title}"`,
+              time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+              sender: "me",
+              read: false,
+            }
+            setMessages((prev) => [...prev, newMessage])
+          }
+        }
+      }
+    }
+  }, [supplierParam, productId, contacts])
+
   const handleSendMessage = () => {
     if (newMessage.trim() === "") return
 
@@ -122,18 +155,18 @@ export function ChatInterface() {
   const filteredContacts = contacts.filter((contact) => contact.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-3 h-[calc(100vh-200px)]">
+    <div className="chat-page-container container mx-auto px-4 py-6">
+      <div className="chat-interface-wrapper bg-white rounded-lg shadow-sm border overflow-hidden">
+        <div className="chat-layout grid grid-cols-1 md:grid-cols-3 h-[calc(100vh-200px)]">
           {/* Contact list */}
           <div className="border-r">
-            <div className="p-3 border-b">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <div className="chat-search-container p-3 border-b">
+              <div className="search-input-wrapper relative">
+                <Search className="search-icon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <Input
                   type="text"
                   placeholder="Tìm kiếm liên hệ"
-                  className="pl-9 h-10"
+                  className="contact-search-input pl-9 h-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />

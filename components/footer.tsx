@@ -16,19 +16,25 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-white border-t">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="site-footer bg-white border-t">
+      <div className="footer-container container mx-auto px-4 py-8">
+        <div className="footer-content grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Download app section */}
-          <div>
-            <h3 className="font-bold text-gray-700 mb-4">TẢI ỨNG DỤNG GIACONGGIATOT</h3>
-            <div className="flex">
-              <div className="mr-4">
+          <div className="footer-download">
+            <h3 className="footer-heading font-bold text-gray-700 mb-4">TẢI ỨNG DỤNG GIACONGGIATOT</h3>
+            <div className="footer-download-content flex">
+              <div className="footer-qr mr-4">
                 <Image src="/images/qr-code.png" alt="QR Code" width={87} height={87} className="border" />
               </div>
-              <div>
+              <div className="footer-app-links">
                 <div className="flex flex-col space-y-2">
-                  <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href="#"
+                    onClick={handleLinkClick}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-app-link"
+                  >
                     <Image
                       src="https://static.chotot.com/storage/default/ios.svg"
                       alt="App Store"
@@ -37,7 +43,13 @@ export function Footer() {
                       className="rounded"
                     />
                   </Link>
-                  <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href="#"
+                    onClick={handleLinkClick}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-app-link"
+                  >
                     <Image
                       src="https://static.chotot.com/storage/default/android.svg"
                       alt="Google Play"
@@ -52,21 +64,21 @@ export function Footer() {
           </div>
 
           {/* Customer support */}
-          <div>
-            <h3 className="font-bold text-gray-700 mb-4">Hỗ trợ khách hàng</h3>
-            <ul className="space-y-2">
+          <div className="footer-support">
+            <h3 className="footer-heading font-bold text-gray-700 mb-4">Hỗ trợ khách hàng</h3>
+            <ul className="footer-support-links space-y-2">
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Trung tâm trợ giúp
                 </Link>
               </li>
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   An toàn mua bán
                 </Link>
               </li>
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Liên hệ hỗ trợ
                 </Link>
               </li>
@@ -74,36 +86,36 @@ export function Footer() {
           </div>
 
           {/* About us */}
-          <div>
-            <h3 className="font-bold text-gray-700 mb-4">VỀ GIACONGGIATOT</h3>
-            <ul className="space-y-2">
+          <div className="footer-about">
+            <h3 className="footer-heading font-bold text-gray-700 mb-4">VỀ GIACONGGIATOT</h3>
+            <ul className="footer-about-links space-y-2">
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Giới thiệu
                 </Link>
               </li>
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Quy chế hoạt động sàn
                 </Link>
               </li>
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Chính sách bảo mật
                 </Link>
               </li>
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Giải quyết tranh chấp
                 </Link>
               </li>
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Tuyển dụng
                 </Link>
               </li>
               <li>
-                <Link href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-orange-500">
+                <Link href="#" onClick={handleLinkClick} className="footer-link text-gray-600 hover:text-orange-500">
                   Blog
                 </Link>
               </li>
@@ -111,10 +123,16 @@ export function Footer() {
           </div>
 
           {/* Social links and certification */}
-          <div>
-            <h3 className="font-bold text-gray-700 mb-4">Liên kết</h3>
-            <div className="flex space-x-4 mb-6">
-              <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+          <div className="footer-social">
+            <h3 className="footer-heading font-bold text-gray-700 mb-4">Liên kết</h3>
+            <div className="footer-social-links flex space-x-4 mb-6">
+              <Link
+                href="#"
+                onClick={handleLinkClick}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+              >
                 <Image
                   src="https://static.chotot.com/storage/default/facebook.svg"
                   alt="Facebook"
@@ -122,7 +140,13 @@ export function Footer() {
                   height={32}
                 />
               </Link>
-              <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+              <Link
+                href="#"
+                onClick={handleLinkClick}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+              >
                 <Image
                   src="https://static.chotot.com/storage/default/youtube.svg"
                   alt="Youtube"
@@ -130,7 +154,13 @@ export function Footer() {
                   height={32}
                 />
               </Link>
-              <Link href="#" onClick={handleLinkClick} target="_blank" rel="noopener noreferrer">
+              <Link
+                href="#"
+                onClick={handleLinkClick}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+              >
                 <Image
                   src="https://static.chotot.com/storage/default/linkedin.svg"
                   alt="LinkedIn"

@@ -6,6 +6,9 @@ import { Phone, Star, Heart, MapPin, Clock, ChevronLeft, ChevronRight } from "lu
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { getProductById } from "@/services/product-service"
 
 interface Product {
   id: number
@@ -19,6 +22,7 @@ interface Product {
   location?: string
   publishedAt?: string
   images?: string[]
+  sellerId?: string
 }
 
 interface ProductDetailContentProps {
@@ -31,136 +35,14 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isFavorite, setIsFavorite] = useState(false)
 
+  const router = useRouter()
+
   useEffect(() => {
-    // Simulate fetching product data
+    // Fetch product data
     const fetchProduct = async () => {
       setLoading(true)
       try {
-        // This would be replaced with an actual API call
-        const products = [
-          {
-            id: 1,
-            title: "Lan can bằng sắt không rỉ",
-            seller: "Phùng Hải Nam",
-            phone: "0964827315",
-            image: "https://satmythuatminhphuc.com/wp-content/uploads/2022/07/ban-cong-don-gian-nhung-thu-hut.jpg.webp",
-            price: "1.200.000đ - 2.500.000đ",
-            rating: 4.5,
-            location: "Quận 7, TP. Hồ Chí Minh",
-            publishedAt: "Đăng 3 ngày trước",
-            description:
-              "Lan can sắt mỹ thuật với thiết kế độc đáo, phù hợp với nhiều không gian kiến trúc. Sản phẩm được làm từ sắt cao cấp, sơn tĩnh điện chống gỉ sét, đảm bảo độ bền đẹp theo thời gian.",
-            images: [
-              "https://satmythuatminhphuc.com/wp-content/uploads/2022/07/ban-cong-don-gian-nhung-thu-hut.jpg.webp",
-              "https://satmythuatminhphuc.com/wp-content/uploads/2022/07/ban-cong-sat-my-thuat-dep.jpg.webp",
-              "https://satmythuatminhphuc.com/wp-content/uploads/2022/07/ban-cong-sat-my-thuat-dep-nhat.jpg.webp",
-            ],
-          },
-          {
-            id: 2,
-            title: "Túi đan bằng tre dây phong cách",
-            seller: "Nguyễn Quốc Minh",
-            phone: "0817392648",
-            image: "https://giamgiaxl.com/wp-content/uploads/2022/04/gio-may-tre-5.jpg",
-            price: "350.000đ",
-            rating: 4.8,
-            location: "Quận 1, TP. Hồ Chí Minh",
-            publishedAt: "Đăng 5 ngày trước",
-            description:
-              "Túi đan thủ công từ tre tự nhiên, thân thiện với môi trường. Thiết kế độc đáo, mang đậm phong cách truyền thống Việt Nam. Thích hợp cho các buổi dạo phố, du lịch.",
-            images: [
-              "https://giamgiaxl.com/wp-content/uploads/2022/04/gio-may-tre-5.jpg",
-              "https://giamgiaxl.com/wp-content/uploads/2022/04/gio-may-tre-1.jpg",
-              "https://giamgiaxl.com/wp-content/uploads/2022/04/gio-may-tre-2.jpg",
-            ],
-          },
-          {
-            id: 3,
-            title: "Đan len quần áo theo ý",
-            seller: "Nguyễn Trung Kiên",
-            phone: "0538491726",
-            image: "/images/knitted-clothes.jpg",
-            description:
-              "Bộ sản phẩm đan len cho trẻ em với thiết kế hình gấu đáng yêu, bao gồm mũ, túi xách và giày. Sản phẩm được làm từ len tự nhiên, mềm mại, an toàn cho làn da nhạy cảm của trẻ. Có thể đặt hàng theo kích thước và màu sắc yêu cầu.",
-            price: "450.000đ - 850.000đ",
-            rating: 5,
-            location: "Quận 2, TP. Hồ Chí Minh",
-            publishedAt: "Đăng hôm qua",
-            images: ["/images/knitted-clothes.jpg"],
-          },
-          {
-            id: 4,
-            title: "Bình lọ gốm hoa tiết hoa văn sắc sảo",
-            seller: "Bùi Đức Nhật",
-            phone: "0472619835",
-            image: "https://gomphuctaman.com/wp-content/uploads/2022/10/cach-nhan-biet-gom-co-2.jpg",
-            price: "580.000đ - 1.200.000đ",
-            rating: 4.7,
-            location: "Quận 3, TP. Hồ Chí Minh",
-            publishedAt: "Đăng 1 tuần trước",
-            images: [
-              "https://gomphuctaman.com/wp-content/uploads/2022/10/cach-nhan-biet-gom-co-2.jpg",
-              "https://gomphuctaman.com/wp-content/uploads/2022/10/cach-nhan-biet-gom-co-1.jpg",
-            ],
-          },
-          {
-            id: 5,
-            title: "Sản phẩm tre nứa bền chắc",
-            seller: "Nguyễn Như Hiếu",
-            phone: "0928374651",
-            image:
-              "https://sieuthitretruc.com/wp-content/uploads/2022/08/rsz_20211221105831-16459314367931232574202-16459314544481653688785_1_1.jpg",
-            price: "250.000đ - 750.000đ",
-            rating: 4.3,
-            location: "Quận Tân Bình, TP. Hồ Chí Minh",
-            publishedAt: "Đăng 2 tuần trước",
-            images: [
-              "https://sieuthitretruc.com/wp-content/uploads/2022/08/rsz_20211221105831-16459314367931232574202-16459314544481653688785_1_1.jpg",
-            ],
-          },
-          {
-            id: 6,
-            title: "Đồ sứ cao cấp trắng men",
-            seller: "Nguyễn Việt Quang",
-            phone: "0851739264",
-            image: "https://gomdaiviet.vn/wp-content/uploads/2021/05/bo-do-an-men-kem-ve-bup-sen-xanh-s4-9384.jpg",
-            price: "1.500.000đ - 3.800.000đ",
-            rating: 4.9,
-            location: "Quận 5, TP. Hồ Chí Minh",
-            publishedAt: "Đăng 3 tuần trước",
-            images: [
-              "https://gomdaiviet.vn/wp-content/uploads/2021/05/bo-do-an-men-kem-ve-bup-sen-xanh-s4-9384.jpg",
-              "https://gomdaiviet.vn/wp-content/uploads/2021/05/bo-do-an-men-kem-ve-bup-sen-xanh-s4-9385.jpg",
-              "https://gomdaiviet.vn/wp-content/uploads/2021/05/bo-do-an-men-kem-ve-bup-sen-xanh-s4-9386.jpg",
-            ],
-          },
-          {
-            id: 7,
-            title: "Đồ giấy thủ công trang trí lễ hội",
-            seller: "Nguyễn Duy Lâm",
-            phone: "0419283746",
-            image: "https://mms.img.susercontent.com/vn-11134207-7r98o-loqd3gmyulow36_tn",
-            price: "120.000đ - 350.000đ",
-            rating: 4.2,
-            location: "Quận 6, TP. Hồ Chí Minh",
-            publishedAt: "Đăng 1 tháng trước",
-            images: ["https://mms.img.susercontent.com/vn-11134207-7r98o-loqd3gmyulow36_tn"],
-          },
-          {
-            id: 8,
-            title: "May vải theo yêu cầu",
-            seller: "Dương Đình Minh",
-            phone: "0647382910",
-            image: "https://i.ytimg.com/vi/eBv1uVYl7wc/hqdefault.jpg",
-            price: "Theo yêu cầu",
-            rating: 4.6,
-            location: "Quận 8, TP. Hồ Chí Minh",
-            publishedAt: "Đăng 2 tháng trước",
-            images: ["https://i.ytimg.com/vi/eBv1uVYl7wc/hqdefault.jpg"],
-          },
-        ]
-
-        const foundProduct = products.find((p) => p.id === Number(id))
+        const foundProduct = await getProductById(id)
         setProduct(foundProduct || null)
       } catch (error) {
         console.error("Error fetching product:", error)
@@ -259,9 +141,10 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
 
           <div>
             <div className="mb-6">
-              <h2 className="text-xl font-bold mb-2">{title}</h2>
               <div className="flex justify-between items-center mb-4">
-                <div></div>
+                <div>
+                  <h2 className="text-xl font-bold mb-2">{title}</h2>
+                </div>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -292,20 +175,35 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
               </div>
             </div>
 
-            <Button className="w-full mb-6">LIÊN HỆ NGAY</Button>
+            <Button
+              className="contact-supplier-button w-full mb-6"
+              onClick={() => router.push(`/chat?supplier=${seller}&id=${id}`)}
+            >
+              LIÊN HỆ NGAY
+            </Button>
 
             {/* Shop information section */}
-            <div className="border rounded-lg p-4 mt-4">
+            <div className="supplier-info-card border rounded-lg p-4 mt-4">
               <div className="flex items-center space-x-4 mb-4">
                 <div className="relative w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-                  <Image src="/placeholder.svg?height=48&width=48" alt={seller} fill className="object-cover" />
-                  <div className="absolute bottom-0 right-0 bg-gray-800 text-white rounded-full p-1 w-5 h-5 flex items-center justify-center text-xs">
+                  <Image
+                    src="/placeholder.svg?height=48&width=48"
+                    alt={seller}
+                    fill
+                    className="supplier-avatar object-cover"
+                  />
+                  <div className="supplier-badge absolute bottom-0 right-0 bg-gray-800 text-white rounded-full p-1 w-5 h-5 flex items-center justify-center text-xs">
                     +
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center">
-                    <span className="font-medium text-sm">{seller}</span>
+                    <Link
+                      href={`/supplier/${product?.sellerId || id}`}
+                      className="supplier-name font-medium text-sm hover:text-orange-500"
+                    >
+                      {seller}
+                    </Link>
                     <div className="ml-2 text-orange-500">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -317,17 +215,17 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
                       </svg>
                     </div>
                   </div>
-                  <div className="flex items-center text-sm text-gray-500 mt-1">
-                    <span className="mr-3">Phản hồi: 88%</span>
-                    <span>479 đã bán</span>
+                  <div className="supplier-stats flex items-center text-sm text-gray-500 mt-1">
+                    <span className="response-rate mr-3">Phản hồi: 88%</span>
+                    <span className="items-sold">479 đã bán</span>
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">Hoạt động 2 ngày trước</div>
+                  <div className="supplier-last-active text-xs text-gray-400 mt-1">Hoạt động 2 ngày trước</div>
                 </div>
               </div>
 
               <hr className="my-3" />
 
-              <div className="flex items-center mb-3">
+              <div className="supplier-rating flex items-center mb-3">
                 <span className="text-lg font-medium mr-1">4.5</span>
                 <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
                 <span className="text-sm ml-2">53 đánh giá</span>
@@ -335,7 +233,7 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
 
               <hr className="my-3" />
 
-              <div className="mb-2">
+              <div className="supplier-policies mb-2">
                 <div className="flex items-center mb-1">
                   <svg className="w-5 h-5 mr-3 text-gray-700" viewBox="0 0 24 24" fill="none">
                     <g fill="currentColor">
@@ -347,8 +245,8 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
                   </svg>
                   <span className="text-sm">Chính sách cửa hàng</span>
                 </div>
-                <div className="pl-8 space-y-3 mt-3">
-                  <div className="flex items-center">
+                <div className="policy-list pl-8 space-y-3 mt-3">
+                  <div className="policy-item flex items-center">
                     <img
                       width="24"
                       height="24"
@@ -358,7 +256,7 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
                     />
                     <span className="text-sm">Freeship, Ship COD toàn quốc</span>
                   </div>
-                  <div className="flex items-center">
+                  <div className="policy-item flex items-center">
                     <img
                       width="24"
                       height="24"
@@ -368,7 +266,7 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
                     />
                     <span className="text-sm">Bảo hành 6 tháng phần cứng</span>
                   </div>
-                  <div className="flex items-center">
+                  <div className="policy-item flex items-center">
                     <img
                       width="24"
                       height="24"
@@ -378,7 +276,7 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
                     />
                     <span className="text-sm">Hỗ trợ trả góp 0% qua thẻ tín dụng, CCCD</span>
                   </div>
-                  <div className="flex items-center">
+                  <div className="policy-item flex items-center">
                     <img
                       width="24"
                       height="24"
