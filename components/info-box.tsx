@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useFeatureNotification } from "@/hooks/use-feature-notification"
 import { FeatureNotification } from "@/components/feature-notification"
-import Link from "next/link"
 
 export function InfoBox() {
   const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
@@ -18,65 +17,32 @@ export function InfoBox() {
     <div className="bg-white py-8">
       <div className="container mx-auto px-4">
         <h2 className="text-xl font-bold mb-4">
-          GiaCongGiaTot - Chợ Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt
+          GiaCongGiaTot – Nền Tảng Mua Bán Trực Tuyến Hàng Đầu Cho Ngành Cơ Khí Việt
         </h2>
 
         <div className="prose max-w-none">
           <p>
-            GiaCongGiaTot chính thức gia nhập thị trường Việt Nam với mục đích tạo ra cho bạn một kênh rao vặt trung
-            gian, kết nối người mua với người bán lại với nhau bằng những giao dịch cực kỳ đơn giản, tiện lợi, nhanh
-            chóng, an toàn, mang đến hiệu quả bất ngờ.
+            GiaCongGiaTot chính thức có mặt trên thị trường Việt Nam với sứ mệnh xây dựng một nền tảng kết nối giao
+            thương uy tín, giúp người mua và người bán trong lĩnh vực gia công cơ khí – từ sắt, thép, inox đến nhôm,
+            đồng – dễ dàng giao dịch một cách nhanh chóng, an toàn và hiệu quả.
           </p>
 
           <p>
-            Đến nay, GiaCongGiaTot tự hào là Website rao vặt được ưa chuộng hàng đầu Việt Nam cho các sản phẩm thủ công
-            mỹ nghệ. Hàng ngàn món hời từ{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Lan can bằng sắt
-            </Link>
-            ,{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Túi đan bằng tre
-            </Link>
-            ,{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Đan len quần áo
-            </Link>
-            ,{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Bình lọ gốm
-            </Link>
-            ,{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Sản phẩm tre nứa
-            </Link>
-            ,{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Đồ sứ cao cấp
-            </Link>
-            ,{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Điêu khắc gỗ
-            </Link>{" "}
-            và nhiều sản phẩm thủ công khác được đăng tin, rao bán trên GiaCongGiaTot.
+            Tự hào là nền tảng được đông đảo cá nhân và doanh nghiệp cơ khí tin tưởng, GiaCongGiaTot chuyên hỗ trợ mua
+            bán và trao đổi đa dạng các sản phẩm như: lan can sắt, khung cửa nhôm kính, kết cấu thép, bàn ghế inox, phụ
+            kiện cơ khí, sản phẩm gia công CNC, máy móc thiết bị và nhiều mặt hàng cơ khí dân dụng – công nghiệp khác.
           </p>
 
           <p>
-            Với GiaCongGiaTot, bạn có thể dễ dàng mua bán, trao đổi bất cứ một loại sản phẩm thủ công nào, dù đó là đồ
-            cũ hay đồ mới với nhiều lĩnh vực khác nhau.
+            Dù bạn là thợ cơ khí, chủ xưởng, nhà cung ứng vật tư hay đang tìm mua những sản phẩm cơ khí đã qua sử dụng,
+            GiaCongGiaTot chính là nơi giúp bạn tiếp cận đối tác và khách hàng tiềm năng một cách dễ dàng. Việc đăng tin
+            hoàn toàn miễn phí, chỉ cần chụp ảnh sản phẩm, mô tả chi tiết và đăng lên nền tảng.
           </p>
 
           <p>
-            Mỗi người trong chúng ta đều có những sản phẩm đã qua sử dụng và không cần dùng tới nữa. Vậy còn chần chừ gì
-            nữa mà không để nó trở nên giá trị hơn với người khác. Rất đơn giản, bạn chỉ cần chụp hình lại, mô tả cụ thể
-            về sản phẩm và sử dụng ứng dụng{" "}
-            <Link href="#" onClick={handleLinkClick}>
-              Đăng tin miễn phí
-            </Link>{" "}
-            của GiaCongGiaTot là đã có thể đến gần hơn với người cần nó.
+            Chúc bạn có những giao dịch thành công và trải nghiệm tuyệt vời tại GiaCongGiaTot – Nền tảng kết nối đam mê
+            cơ khí Việt!
           </p>
-
-          <p>Chúc các bạn có những trải nghiệm mua bán tuyệt vời trên GiaCongGiaTot.</p>
         </div>
       </div>
       <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />

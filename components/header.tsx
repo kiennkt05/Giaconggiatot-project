@@ -89,7 +89,7 @@ export function Header() {
           <div className="header-left flex items-center space-x-2">
             <Link href="/" className="header-logo flex items-center">
               <div className="header-logo-image relative h-10 w-10 mr-2">
-                <Image src="/images/logo.png" alt="GiaCongGiaTot" fill className="object-contain" />
+                <Image src="https://i.imgur.com/28F0sCJ.png" alt="GiaCongGiaTot" fill className="object-contain" />
               </div>
               <span className="header-logo-text font-bold text-lg hidden md:inline-block">GiaCongGiaTot</span>
             </Link>

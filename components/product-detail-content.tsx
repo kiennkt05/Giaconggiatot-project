@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Phone, Star, Heart, MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react"
+import { Phone, Star, Heart, MapPin, Clock, ChevronLeft, ChevronRight, MessageSquare, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { getProductById } from "@/services/product-service"
+import { useFeatureNotification } from "@/hooks/use-feature-notification"
+import { FeatureNotification } from "@/components/feature-notification"
 
 interface Product {
   id: number
@@ -34,6 +36,7 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
   const [loading, setLoading] = useState(true)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isFavorite, setIsFavorite] = useState(false)
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
 
   const router = useRouter()
 
@@ -82,7 +85,11 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite)
+    showFeatureNotification()
   }
+
+  // Determine if this is a product from the homepage (IDs 1-8) or from the explore page (IDs 9-16)
+  const isHomepageProduct = product.id >= 1 && product.id <= 8
 
   return (
     <>
@@ -155,7 +162,11 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
                 </Button>
               </div>
 
-              {price && <p className="text-2xl font-bold text-primary mb-4">{price}</p>}
+              {/* Only show price for homepage products (IDs 1-8) */}
+              {product.id >= 1 && product.id <= 8 && price && (
+                <p className="text-2xl font-bold text-primary mb-4">{price}</p>
+              )}
+              {product.id >= 9 && <p className="text-2xl font-bold text-primary mb-4">Liên hệ để biết giá</p>}
 
               <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex items-center">
@@ -175,12 +186,18 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
               </div>
             </div>
 
-            <Button
-              className="contact-supplier-button w-full mb-6"
-              onClick={() => router.push(`/chat?supplier=${seller}&id=${id}`)}
-            >
-              LIÊN HỆ NGAY
-            </Button>
+            {/* Show different buttons based on product type */}
+            {product.id >= 1 && product.id <= 8 ? (
+              <Button className="w-full mb-6" onClick={() => showFeatureNotification()}>
+                <ShoppingCart className="h-5 w-5 mr-2" />
+                THÊM VÀO GIỎ HÀNG
+              </Button>
+            ) : (
+              <Button className="w-full mb-6" onClick={() => router.push(`/chat?supplier=${seller}&id=${id}`)}>
+                <MessageSquare className="h-5 w-5 mr-2" />
+                LIÊN HỆ NGAY
+              </Button>
+            )}
 
             {/* Shop information section */}
             <div className="supplier-info-card border rounded-lg p-4 mt-4">
@@ -362,6 +379,7 @@ export function ProductDetailContent({ id }: ProductDetailContentProps) {
           </TabsContent>
         </Tabs>
       </section>
+      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </>
   )
 }

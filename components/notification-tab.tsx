@@ -24,7 +24,7 @@ export function NotificationTab() {
     {
       id: "1",
       title: "Đơn hàng mới",
-      message: "Đơn hàng #12345 đã được xác nhận",
+      message: "Đơn hàng #12345 cho sản phẩm 'Cửa sắt cao đẹp chắc chẵn' đã được xác nhận",
       time: "5 phút trước",
       read: false,
       type: "order",
@@ -32,7 +32,7 @@ export function NotificationTab() {
     {
       id: "2",
       title: "Tin nhắn mới",
-      message: "Bạn có tin nhắn mới từ Nguyễn Văn A",
+      message: "Bạn có tin nhắn mới từ Phùng Hải Nam về sản phẩm 'Mái tôn công trình'",
       time: "30 phút trước",
       read: false,
       type: "chat",
@@ -40,7 +40,7 @@ export function NotificationTab() {
     {
       id: "3",
       title: "Khuyến mãi",
-      message: "Giảm 10% cho đơn hàng đầu tiên",
+      message: "Giảm 10% cho đơn hàng đầu tiên khi mua sản phẩm 'Cửa gỗ tấm, khung sắt'",
       time: "2 giờ trước",
       read: true,
       type: "promotion",
@@ -56,7 +56,7 @@ export function NotificationTab() {
     {
       id: "5",
       title: "Đơn hàng đã giao",
-      message: "Đơn hàng #12340 đã được giao thành công",
+      message: "Đơn hàng #12340 cho sản phẩm 'Mái kính, khung sắt' đã được giao thành công",
       time: "2 ngày trước",
       read: true,
       type: "order",
@@ -64,7 +64,7 @@ export function NotificationTab() {
     {
       id: "6",
       title: "Tin nhắn mới",
-      message: "Bạn có tin nhắn mới từ Trần Thị B",
+      message: "Bạn có tin nhắn mới từ Nguyễn Như Hiếu về sản phẩm 'Lan can nhôm'",
       time: "3 ngày trước",
       read: true,
       type: "chat",
@@ -72,7 +72,7 @@ export function NotificationTab() {
     {
       id: "7",
       title: "Khuyến mãi đặc biệt",
-      message: "Giảm 20% cho tất cả sản phẩm thủ công",
+      message: "Giảm 20% cho tất cả sản phẩm khung sắt và nhôm",
       time: "4 ngày trước",
       read: true,
       type: "promotion",

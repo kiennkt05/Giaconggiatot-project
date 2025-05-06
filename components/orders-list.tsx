@@ -33,9 +33,8 @@ export function OrdersList({ type }: OrdersListProps) {
   const [orders, setOrders] = useState<Order[]>([
     {
       id: "ORD-001",
-      productName: "Lan can bằng sắt không rỉ",
-      productImage:
-        "https://satmythuatminhphuc.com/wp-content/uploads/2022/07/ban-cong-don-gian-nhung-thu-hut.jpg.webp",
+      productName: "Cửa sắt cao đẹp chắc chẵn",
+      productImage: "https://i.imgur.com/Bn1XF8D.png",
       price: "1.500.000đ",
       quantity: 1,
       status: "delivered",
@@ -51,14 +50,14 @@ export function OrdersList({ type }: OrdersListProps) {
     },
     {
       id: "ORD-002",
-      productName: "Túi đan bằng tre dây phong cách",
-      productImage: "https://giamgiaxl.com/wp-content/uploads/2022/04/gio-may-tre-5.jpg",
+      productName: "Mái tôn công trình theo thiết kế đẹp, chắc chắn",
+      productImage: "https://i.imgur.com/jJQ6vA4.png",
       price: "350.000đ",
       quantity: 2,
       status: "shipping",
       date: "20/04/2023",
       seller: {
-        id: "3",
+        id: "2",
         name: "Nguyễn Quốc Minh",
       },
       buyer: {
@@ -68,14 +67,14 @@ export function OrdersList({ type }: OrdersListProps) {
     },
     {
       id: "ORD-003",
-      productName: "Đan len quần áo theo ý",
-      productImage: "/images/knitted-clothes.jpg",
+      productName: "Cửa gỗ tấm, khung sắt theo thiết kế",
+      productImage: "https://i.imgur.com/tXMmSJK.png",
       price: "650.000đ",
       quantity: 1,
       status: "processing",
       date: "25/04/2023",
       seller: {
-        id: "4",
+        id: "3",
         name: "Nguyễn Trung Kiên",
       },
       buyer: {
@@ -85,14 +84,14 @@ export function OrdersList({ type }: OrdersListProps) {
     },
     {
       id: "ORD-004",
-      productName: "Bình lọ gốm hoa tiết hoa văn sắc sảo",
-      productImage: "https://gomphuctaman.com/wp-content/uploads/2022/10/cach-nhan-biet-gom-co-2.jpg",
+      productName: "Mái kính, khung sắt theo thiêt kế",
+      productImage: "https://i.imgur.com/mlUcQQn.png",
       price: "780.000đ",
       quantity: 1,
       status: "pending",
       date: "28/04/2023",
       seller: {
-        id: "5",
+        id: "4",
         name: "Bùi Đức Nhật",
       },
       buyer: {
@@ -102,15 +101,14 @@ export function OrdersList({ type }: OrdersListProps) {
     },
     {
       id: "ORD-005",
-      productName: "Sản phẩm tre nứa bền chắc",
-      productImage:
-        "https://sieuthitretruc.com/wp-content/uploads/2022/08/rsz_20211221105831-16459314367931232574202-16459314544481653688785_1_1.jpg",
+      productName: "Lan can nhôm đẹp lắp đặt tại nhà",
+      productImage: "https://i.imgur.com/9v6hwVV.png",
       price: "450.000đ",
       quantity: 3,
       status: "cancelled",
       date: "10/04/2023",
       seller: {
-        id: "6",
+        id: "5",
         name: "Nguyễn Như Hiếu",
       },
       buyer: {
@@ -287,6 +285,47 @@ export function OrdersList({ type }: OrdersListProps) {
               .map((order) => (
                 <div key={order.id} className="bg-white rounded-lg shadow-sm p-4 border">
                   {/* Order content */}
+                  <div className="flex justify-between items-center border-b pb-3">
+                    <div className="flex items-center">
+                      {getStatusIcon(order.status)}
+                      <span className="ml-2 text-sm font-medium">
+                        {type === "purchase" ? order.seller?.name : order.buyer?.name}
+                      </span>
+                    </div>
+                    <div className="flex items-center">{getStatusBadge(order.status)}</div>
+                  </div>
+
+                  <div className="py-4 flex">
+                    <div className="relative h-20 w-20 flex-shrink-0">
+                      <Image
+                        src={order.productImage || "/placeholder.svg"}
+                        alt={order.productName}
+                        fill
+                        className="object-cover rounded-md"
+                      />
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <h3 className="font-medium">{order.productName}</h3>
+                      <p className="text-sm text-gray-500">x{order.quantity}</p>
+                      <p className="text-orange-500 font-bold mt-1">{order.price}</p>
+                    </div>
+                  </div>
+
+                  <div className="border-t pt-3 flex justify-between items-center">
+                    <div className="text-sm text-gray-500">Ngày đặt hàng: {order.date}</div>
+                    <div className="flex space-x-2">
+                      <Button variant="outline" size="sm">
+                        <MessageSquare className="h-4 w-4 mr-2" />
+                        Liên hệ
+                      </Button>
+                      {order.status === "delivered" && <Button size="sm">Đánh giá</Button>}
+                      {order.status === "pending" && (
+                        <Button variant="destructive" size="sm">
+                          Hủy đơn
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               ))
           ) : (
@@ -303,6 +342,47 @@ export function OrdersList({ type }: OrdersListProps) {
               .map((order) => (
                 <div key={order.id} className="bg-white rounded-lg shadow-sm p-4 border">
                   {/* Order content */}
+                  <div className="flex justify-between items-center border-b pb-3">
+                    <div className="flex items-center">
+                      {getStatusIcon(order.status)}
+                      <span className="ml-2 text-sm font-medium">
+                        {type === "purchase" ? order.seller?.name : order.buyer?.name}
+                      </span>
+                    </div>
+                    <div className="flex items-center">{getStatusBadge(order.status)}</div>
+                  </div>
+
+                  <div className="py-4 flex">
+                    <div className="relative h-20 w-20 flex-shrink-0">
+                      <Image
+                        src={order.productImage || "/placeholder.svg"}
+                        alt={order.productName}
+                        fill
+                        className="object-cover rounded-md"
+                      />
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <h3 className="font-medium">{order.productName}</h3>
+                      <p className="text-sm text-gray-500">x{order.quantity}</p>
+                      <p className="text-orange-500 font-bold mt-1">{order.price}</p>
+                    </div>
+                  </div>
+
+                  <div className="border-t pt-3 flex justify-between items-center">
+                    <div className="text-sm text-gray-500">Ngày đặt hàng: {order.date}</div>
+                    <div className="flex space-x-2">
+                      <Button variant="outline" size="sm">
+                        <MessageSquare className="h-4 w-4 mr-2" />
+                        Liên hệ
+                      </Button>
+                      {order.status === "delivered" && <Button size="sm">Đánh giá</Button>}
+                      {order.status === "pending" && (
+                        <Button variant="destructive" size="sm">
+                          Hủy đơn
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               ))
           ) : (
@@ -319,6 +399,47 @@ export function OrdersList({ type }: OrdersListProps) {
               .map((order) => (
                 <div key={order.id} className="bg-white rounded-lg shadow-sm p-4 border">
                   {/* Order content */}
+                  <div className="flex justify-between items-center border-b pb-3">
+                    <div className="flex items-center">
+                      {getStatusIcon(order.status)}
+                      <span className="ml-2 text-sm font-medium">
+                        {type === "purchase" ? order.seller?.name : order.buyer?.name}
+                      </span>
+                    </div>
+                    <div className="flex items-center">{getStatusBadge(order.status)}</div>
+                  </div>
+
+                  <div className="py-4 flex">
+                    <div className="relative h-20 w-20 flex-shrink-0">
+                      <Image
+                        src={order.productImage || "/placeholder.svg"}
+                        alt={order.productName}
+                        fill
+                        className="object-cover rounded-md"
+                      />
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <h3 className="font-medium">{order.productName}</h3>
+                      <p className="text-sm text-gray-500">x{order.quantity}</p>
+                      <p className="text-orange-500 font-bold mt-1">{order.price}</p>
+                    </div>
+                  </div>
+
+                  <div className="border-t pt-3 flex justify-between items-center">
+                    <div className="text-sm text-gray-500">Ngày đặt hàng: {order.date}</div>
+                    <div className="flex space-x-2">
+                      <Button variant="outline" size="sm">
+                        <MessageSquare className="h-4 w-4 mr-2" />
+                        Liên hệ
+                      </Button>
+                      {order.status === "delivered" && <Button size="sm">Đánh giá</Button>}
+                      {order.status === "pending" && (
+                        <Button variant="destructive" size="sm">
+                          Hủy đơn
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               ))
           ) : (

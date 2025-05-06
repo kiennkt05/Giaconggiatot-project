@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MoreHorizontal, Plus, MessageSquare, Calendar, CheckCircle, MapPin } from "lucide-react"
 import { getSupplierById } from "@/services/supplier-service"
-import { getProductsBySupplier } from "@/services/product-service"
+import { getProductsByIds } from "@/services/product-service"
 
 interface SupplierProfileProps {
   id: string
@@ -31,9 +31,9 @@ export function SupplierProfile({ id }: SupplierProfileProps) {
       if (supplierData) {
         setSupplier(supplierData)
 
-        // Get products for this supplier
-        const products = getProductsBySupplier(id)
-        console.log("Supplier products:", products)
+        // Get products from homepage (IDs 1-8) instead of supplier-specific products
+        const products = getProductsByIds([1, 2, 3, 4, 5, 6, 7, 8])
+        console.log("Products:", products)
         setSupplierProducts(products)
       } else {
         setError(`Supplier with ID ${id} not found`)

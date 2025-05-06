@@ -4,11 +4,12 @@ import type React from "react"
 
 import { useState } from "react"
 import Image from "next/image"
-import { Heart } from "lucide-react"
+import { Heart, MessageSquare, ShoppingCart } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { useFeatureNotification } from "@/hooks/use-feature-notification"
 import { FeatureNotification } from "@/components/feature-notification"
+import { Button } from "@/components/ui/button"
 
 interface ProductCardProps {
   id: number
@@ -16,12 +17,23 @@ interface ProductCardProps {
   seller: string
   phone: string
   image: string
-  price: string
+  price?: string
   rating?: number
   description?: string
+  contactOnly?: boolean
 }
 
-export function ProductCard({ id, title, seller, phone, image, price, rating, description }: ProductCardProps) {
+export function ProductCard({
+  id,
+  title,
+  seller,
+  phone,
+  image,
+  price,
+  rating,
+  description,
+  contactOnly,
+}: ProductCardProps) {
   const [isFavorite, setIsFavorite] = useState(false)
   const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
 
@@ -40,7 +52,7 @@ export function ProductCard({ id, title, seller, phone, image, price, rating, de
   return (
     <>
       <Link href={`/products/${id}`} onClick={handleProductClick} className="product-card-link">
-        <Card className="product-card overflow-hidden group transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-primary cursor-pointer">
+        <Card className="product-card overflow-hidden group transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-primary cursor-pointer h-full flex flex-col">
           <div className="product-image-container relative aspect-square">
             <Image
               src={image || "/placeholder.svg"}
@@ -57,15 +69,49 @@ export function ProductCard({ id, title, seller, phone, image, price, rating, de
               <Heart className={`h-5 w-5 ${isFavorite ? "fill-current" : ""}`} />
             </button>
           </div>
-          <div className="product-details p-3">
+          <div className="product-details p-3 flex flex-col flex-grow">
             <h3 className="product-title font-medium text-sm line-clamp-2 mb-1 group-hover:text-primary transition-colors">
               {title}
             </h3>
-            <div className="product-price text-orange-500 font-bold">{price}</div>
+            {price && <div className="product-price text-orange-500 font-bold">{price}</div>}
             <div className="product-meta flex items-center justify-between mt-2 text-xs text-gray-500">
               <span className="product-seller">{seller}</span>
               <span className="product-location">TP Hồ Chí Minh</span>
             </div>
+
+            {/* Spacer to push button to bottom */}
+            <div className="flex-grow"></div>
+
+            {/* Action button - either Contact or Add to Cart */}
+            {contactOnly ? (
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full mt-2 text-primary border-primary hover:bg-primary/10"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  showFeatureNotification()
+                }}
+              >
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Liên hệ
+              </Button>
+            ) : (
+              <Button
+                variant="default"
+                size="sm"
+                className="w-full mt-2"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  showFeatureNotification()
+                }}
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Thêm vào giỏ hàng
+              </Button>
+            )}
           </div>
         </Card>
       </Link>

@@ -1,89 +1,99 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface BannerSlide {
-  id: number
-  imageUrl: string
-  alt: string
-  link: string
+  id: number;
+  imageUrl: string;
+  alt: string;
+  link: string;
 }
 
 export function BannerSlider() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const banners: BannerSlide[] = [
     {
       id: 1,
       imageUrl:
-        "https://cdn.chotot.com/admincentre/lyUqIZB2GKoglbY3y2kcnfSYwmxJCgfow6yBZ474mco/preset:raw/plain/40cbae95b36176c6785a88467e252b75-2928430618505531480.jpg",
-      alt: "Khuyến mãi đặc biệt",
-      link: "/khuyen-mai",
+        "https://chuyenlammaiton.com/wp-content/uploads/2022/10/banner-cua.jpg",
     },
     {
       id: 2,
       imageUrl:
-        "https://cdn.chotot.com/admincentre/UgAFaZoXoTZmLGZkpGS_jIU9s49H1A3XUqBfSbGV-Yw/preset:raw/plain/693c0e9e9ec764ca4f836846f5519a3c-2823391393649214976.jpg",
-      alt: "Sản phẩm thủ công mới",
-      link: "/san-pham-moi",
+        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
     },
     {
       id: 3,
       imageUrl:
-        "https://cdn.chotot.com/admincentre/zOSS_2_BBXGxjXG8xzYJlgHhRmUP7V5XRmfPb-Ys2Oc/preset:raw/plain/7c81c40fd949883e5c88b6ab8c5414fb-2823391393649214977.jpg",
-      alt: "Ưu đãi cho người bán",
-      link: "/uu-dai-nguoi-ban",
+        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
     },
-  ]
+    {
+      id: 4,
+      imageUrl:
+        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
+    },
+    {
+      id: 5,
+      imageUrl:
+        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
+    },
+  ];
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1))
-    setIsAutoPlaying(false)
-    setTimeout(() => setIsAutoPlaying(true), 5000)
-  }
+    setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? banners.length - 1 : prev - 1))
-    setIsAutoPlaying(false)
-    setTimeout(() => setIsAutoPlaying(true), 5000)
-  }
+    setCurrentSlide((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-    setIsAutoPlaying(false)
-    setTimeout(() => setIsAutoPlaying(true), 5000)
-  }
+    setCurrentSlide(index);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
 
   useEffect(() => {
-    let interval: NodeJS.Timeout
+    let interval: NodeJS.Timeout;
 
     if (isAutoPlaying) {
       interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1))
-      }, 5000)
+        setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
+      }, 5000);
     }
 
     return () => {
-      if (interval) clearInterval(interval)
-    }
-  }, [isAutoPlaying, banners.length])
+      if (interval) clearInterval(interval);
+    };
+  }, [isAutoPlaying, banners.length]);
 
   return (
     <div className="banner-slider-container relative h-[180px] md:h-[235px] rounded-lg overflow-hidden">
       <div
         className="banner-slider-track flex transition-transform duration-500 ease-in-out h-full"
-        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        style={{
+          transform: `translateX(-${currentSlide * 100}%)`,
+          transition: "transform 0.5s ease-in-out",
+        }}
       >
         {banners.map((banner) => (
-          <div key={banner.id} className="banner-slide flex-shrink-0 w-full h-full relative">
+          <div
+            key={banner.id}
+            className="banner-slide flex-shrink-0 w-full h-full relative"
+          >
             <Image
               src={banner.imageUrl || "/placeholder.svg"}
               alt={banner.alt}
               fill
-              className="banner-image object-cover"
+              className="banner-image object-contain"
               priority
             />
           </div>
@@ -120,5 +130,5 @@ export function BannerSlider() {
         ))}
       </div>
     </div>
-  )
+  );
 }

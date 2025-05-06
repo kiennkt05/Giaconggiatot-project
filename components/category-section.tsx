@@ -10,51 +10,27 @@ import { FeatureNotification } from "@/components/feature-notification"
 const categories = [
   {
     id: 1,
-    name: "Lan can bằng sắt",
-    icon: "/images/categories/iron.png",
+    name: "Kệ sắt",
+    icon: "https://vinaoffice.com/images/product/vinaoffice_Product_full_19402018_094003.jpg",
     url: "/mua-ban-lan-can-bang-sat",
   },
   {
     id: 2,
-    name: "Túi đan bằng tre",
-    icon: "/images/categories/bamboo.png",
+    name: "Bàn ghế khung sắt",
+    icon: "https://banghecafegiare.com.vn/upload/images/ban-ghe-nha-hang-quan-nhau-khung-sat%20(2).jpg",
     url: "/mua-ban-tui-dan-bang-tre",
   },
   {
     id: 3,
-    name: "Đan len quần áo",
-    icon: "/images/categories/wool.png",
+    name: "Lò nhôm",
+    icon: "https://thanhluan.net/wp-content/uploads/2016/10/thung-hoa-vang.png",
     url: "/mua-ban-dan-len-quan-ao",
   },
   {
     id: 4,
-    name: "Bình lọ gốm",
-    icon: "/images/categories/pottery.png",
+    name: "tủ nhôm",
+    icon: "https://xaydungnoithat.net/wp-content/uploads/2024/11/tu-chan-bat-nhom-kinh-7.jpg",
     url: "/mua-ban-binh-lo-gom",
-  },
-  {
-    id: 5,
-    name: "Sản phẩm tre nứa",
-    icon: "/images/categories/bamboo.png",
-    url: "/mua-ban-san-pham-tre-nua",
-  },
-  {
-    id: 6,
-    name: "Đồ sứ cao cấp",
-    icon: "/images/categories/pottery.png",
-    url: "/mua-ban-do-su-cao-cap",
-  },
-  {
-    id: 7,
-    name: "Điêu khắc gỗ",
-    icon: "/images/categories/wooden.png",
-    url: "/mua-ban-dieu-khac-go",
-  },
-  {
-    id: 8,
-    name: "Tất cả danh mục",
-    icon: "/images/categories/all.png",
-    url: "/mua-ban",
   },
 ]
 

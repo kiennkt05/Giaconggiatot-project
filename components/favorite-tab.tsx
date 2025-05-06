@@ -25,54 +25,53 @@ export function FavoriteTab() {
   const [isOpen, setIsOpen] = useState(false)
   const [favorites, setFavorites] = useState<FavoriteItem[]>([
     {
-      id: 1,
-      title: "Lan can bằng sắt không rỉ",
+      id: 9,
+      title: "Cửa sắt cao đẹp chắc chẵn",
       price: "1.200.000đ - 2.500.000đ",
-      image: "https://satmythuatminhphuc.com/wp-content/uploads/2022/07/ban-cong-don-gian-nhung-thu-hut.jpg.webp",
+      image: "https://i.imgur.com/Bn1XF8D.png",
       supplier: {
         id: 1,
         name: "Phùng Hải Nam",
       },
     },
     {
-      id: 2,
-      title: "Túi đan bằng tre dây phong cách",
+      id: 10,
+      title: "Mái tôn công trình theo thiết kế đẹp, chắc chắn",
       price: "350.000đ",
-      image: "https://giamgiaxl.com/wp-content/uploads/2022/04/gio-may-tre-5.jpg",
-      supplier: {
-        id: 1,
-        name: "Phùng Hải Nam",
-      },
-    },
-    {
-      id: 3,
-      title: "Đan len quần áo theo ý",
-      price: "450.000đ - 850.000đ",
-      image: "/images/knitted-clothes.jpg",
+      image: "https://i.imgur.com/jJQ6vA4.png",
       supplier: {
         id: 2,
+        name: "Nguyễn Quốc Minh",
+      },
+    },
+    {
+      id: 11,
+      title: "Cửa gỗ tấm, khung sắt theo thiết kế",
+      price: "450.000đ - 850.000đ",
+      image: "https://i.imgur.com/tXMmSJK.png",
+      supplier: {
+        id: 3,
         name: "Nguyễn Trung Kiên",
       },
     },
     {
-      id: 4,
-      title: "Bình lọ gốm hoa tiết hoa văn sắc sảo",
+      id: 12,
+      title: "Mái kính, khung sắt theo thiêt kế",
       price: "580.000đ - 1.200.000đ",
-      image: "https://gomphuctaman.com/wp-content/uploads/2022/10/cach-nhan-biet-gom-co-2.jpg",
+      image: "https://i.imgur.com/mlUcQQn.png",
       supplier: {
-        id: 3,
+        id: 4,
         name: "Bùi Đức Nhật",
       },
     },
     {
-      id: 5,
-      title: "Sản phẩm tre nứa bền chắc",
+      id: 13,
+      title: "Lan can nhôm đẹp lắp đặt tại nhà",
       price: "250.000đ - 750.000đ",
-      image:
-        "https://sieuthitretruc.com/wp-content/uploads/2022/08/rsz_20211221105831-16459314367931232574202-16459314544481653688785_1_1.jpg",
+      image: "https://i.imgur.com/9v6hwVV.png",
       supplier: {
-        id: 3,
-        name: "Bùi Đức Nhật",
+        id: 5,
+        name: "Nguyễn Như Hiếu",
       },
     },
   ])
