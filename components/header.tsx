@@ -12,56 +12,17 @@ import { LocationDropdown } from "@/components/location-dropdown"
 import { NotificationTab } from "@/components/notification-tab"
 import { FavoriteTab } from "@/components/favorite-tab"
 import { ShoppingTab } from "@/components/shopping-tab"
-import { useFeatureNotification } from "@/hooks/use-feature-notification"
-import { FeatureNotification } from "@/components/feature-notification"
 
 // Update the Header component to use usePathname
 export function Header() {
   const [selectedCity, setSelectedCity] = useState("Toàn Quốc")
   const pathname = usePathname()
-  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
-
-  const cities = [
-    "Toàn Quốc",
-    "An Giang",
-    "Bắc Ninh",
-    "Cao Bằng",
-    "Cà Mau",
-    "Cần Thơ",
-    "Gia Lai",
-    "Huế",
-    "Hà Nội",
-    "Hà Tĩnh",
-    "Hưng Yên",
-    "Hải Phòng",
-    "Hồ Chí Minh",
-    "Khánh Hòa",
-    "Lai Châu",
-    "Lào Cai",
-    "Lâm Đồng",
-    "Lạng Sơn",
-    "Nghệ An",
-    "Ninh Bình",
-    "Phú Thọ",
-    "Quảng Ngãi",
-    "Quảng Ninh",
-    "Quảng Trị",
-    "Sơn La",
-    "Thanh Hoá",
-    "Thái Nguyên",
-    "Tuyên Quang",
-    "Tây Ninh",
-    "Vĩnh Long",
-    "Điện Biên",
-    "Đà Nẵng",
-    "Đắk Lắk",
-    "Đồng Nai",
-    "Đồng Tháp",
-  ]
 
   const handleUtilityLinkClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    showFeatureNotification()
+    if (typeof window !== "undefined" && window.showFeatureNotification) {
+      window.showFeatureNotification()
+    }
   }
 
   return (
@@ -107,13 +68,19 @@ export function Header() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault()
-                    showFeatureNotification()
+                    if (typeof window !== "undefined" && window.showFeatureNotification) {
+                      window.showFeatureNotification()
+                    }
                   }
                 }}
               />
               <Search
                 className="header-search-icon absolute left-3 top-2.5 h-4 w-4 text-muted-foreground cursor-pointer"
-                onClick={showFeatureNotification}
+                onClick={() => {
+                  if (typeof window !== "undefined" && window.showFeatureNotification) {
+                    window.showFeatureNotification()
+                  }
+                }}
               />
             </div>
           </div>
@@ -170,7 +137,45 @@ export function Header() {
           </Link>
         </nav>
       </div>
-      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </header>
   )
 }
+
+// Cities data
+const cities = [
+  "Toàn Quốc",
+  "An Giang",
+  "Bắc Ninh",
+  "Cao Bằng",
+  "Cà Mau",
+  "Cần Thơ",
+  "Gia Lai",
+  "Huế",
+  "Hà Nội",
+  "Hà Tĩnh",
+  "Hưng Yên",
+  "Hải Phòng",
+  "Hồ Chí Minh",
+  "Khánh Hòa",
+  "Lai Châu",
+  "Lào Cai",
+  "Lâm Đồng",
+  "Lạng Sơn",
+  "Nghệ An",
+  "Ninh Bình",
+  "Phú Thọ",
+  "Quảng Ngãi",
+  "Quảng Ninh",
+  "Quảng Trị",
+  "Sơn La",
+  "Thanh Hoá",
+  "Thái Nguyên",
+  "Tuyên Quang",
+  "Tây Ninh",
+  "Vĩnh Long",
+  "Điện Biên",
+  "Đà Nẵng",
+  "Đắk Lắk",
+  "Đồng Nai",
+  "Đồng Tháp",
+]

@@ -4,8 +4,6 @@ import type React from "react"
 
 import Image from "next/image"
 import Link from "next/link"
-import { useFeatureNotification } from "@/hooks/use-feature-notification"
-import { FeatureNotification } from "@/components/feature-notification"
 
 const categories = [
   {
@@ -47,17 +45,17 @@ const categories = [
     id: 8,
     name: "khung tranh",
     icon: "https://pngimg.com/uploads/mirror/mirror_PNG17324.png",
-  }
+  },
 ]
 
 export function CategorySection() {
-  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
-
   const handleCategoryClick = (e: React.MouseEvent, category: (typeof categories)[0]) => {
     // Only show notification for categories that aren't implemented yet
     if (category.url !== "/kham-pha") {
       e.preventDefault()
-      showFeatureNotification()
+      if (typeof window !== "undefined" && window.showFeatureNotification) {
+        window.showFeatureNotification()
+      }
     }
   }
 
@@ -87,7 +85,6 @@ export function CategorySection() {
           ))}
         </div>
       </div>
-      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
     </div>
   )
 }

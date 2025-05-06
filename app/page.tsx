@@ -1,35 +1,17 @@
-"use client"
-
-import type React from "react"
-
-import { Button } from "@/components/ui/button"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CategorySection } from "@/components/category-section"
 import { InfoBox } from "@/components/info-box"
-import { useFeatureNotification } from "@/hooks/use-feature-notification"
-import { FeatureNotification } from "@/components/feature-notification"
 import { BannerSlider } from "@/components/banner-slider"
 import { GridLayout } from "@/components/grid-layout"
 import { getProductsByIds } from "@/services/product-service"
+import { Button } from "@/components/ui/button"
+
+export const dynamic = "force-static"
 
 export default function Home() {
-  // Initialize the notification hook safely
-  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification() || {
-    showNotification: false,
-    showFeatureNotification: () => {},
-    hideFeatureNotification: () => {},
-  }
-
   // Get products with IDs 1-8 for the homepage
   const products = getProductsByIds([1, 2, 3, 4, 5, 6, 7, 8])
-
-  const handleButtonClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    if (showFeatureNotification) {
-      showFeatureNotification()
-    }
-  }
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -50,7 +32,7 @@ export default function Home() {
         <section className="container mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-bold">Tin đăng mới nhất</h2>
-            <Button variant="link" className="text-orange-500" onClick={handleButtonClick}>
+            <Button variant="link" className="text-orange-500">
               Xem tất cả
             </Button>
           </div>
@@ -58,7 +40,7 @@ export default function Home() {
           <GridLayout products={products} contactOnly={false} />
 
           <div className="flex justify-center mt-8">
-            <Button variant="outline" className="rounded-full px-8" onClick={handleButtonClick}>
+            <Button variant="outline" className="rounded-full px-8">
               Xem thêm
             </Button>
           </div>
@@ -69,9 +51,6 @@ export default function Home() {
       </main>
 
       <Footer />
-      {typeof showNotification === "boolean" && (
-        <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
-      )}
     </div>
   )
 }
