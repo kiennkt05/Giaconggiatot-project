@@ -82,7 +82,7 @@ export function PostCreationForm() {
             <p className="text-sm text-gray-500 mb-4">
               Xem thêm về{" "}
               <Link href="https://trogiup.chotot.com/nguoi-ban/dang-tin/" target="_blank" className="text-blue-600">
-                Quy định đăng tin của Chợ Tốt
+                Quy định đăng tin
               </Link>
             </p>
 

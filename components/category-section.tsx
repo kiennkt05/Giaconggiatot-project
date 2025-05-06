@@ -29,24 +29,24 @@ const categories = [
     icon: "https://xaydungnoithat.net/wp-content/uploads/2024/11/tu-chan-bat-nhom-kinh-7.jpg",
   },
   {
-    id: 5:
-    name: "Hàng rào"
-    icon: "https://i.pinimg.com/736x/81/4b/0b/814b0b7b6d855158b268b608d05a2ba6.jpg"
+    id: 5,
+    name: "Hàng rào",
+    icon: "https://i.pinimg.com/736x/81/4b/0b/814b0b7b6d855158b268b608d05a2ba6.jpg",
   },
   {
-    id: 6:
-    name: "Cửa sổ"
-    icon: "https://i.pinimg.com/736x/a8/ca/90/a8ca9073e5375d72d7083774bb990bbd.jpg"
+    id: 6,
+    name: "Cửa sổ",
+    icon: "https://i.pinimg.com/736x/a8/ca/90/a8ca9073e5375d72d7083774bb990bbd.jpg",
   },
   {
-    id: 7:
-    name: "Cửa"
-    icon: "https://i.pinimg.com/736x/50/b0/6f/50b06ff72f503c18af9b2e9ac9e0dd6a.jpg"
+    id: 7,
+    name: "Cửa",
+    icon: "https://i.pinimg.com/736x/50/b0/6f/50b06ff72f503c18af9b2e9ac9e0dd6a.jpg",
   },
   {
-    id: 8:
-    name: "khung tranh"
-    icon: "https://pngimg.com/uploads/mirror/mirror_PNG17324.png"
+    id: 8,
+    name: "khung tranh",
+    icon: "https://pngimg.com/uploads/mirror/mirror_PNG17324.png",
   }
 ]
 
