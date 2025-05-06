@@ -1,82 +1,73 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface BannerSlide {
-  id: number;
-  imageUrl: string;
-  alt: string;
-  link: string;
+  id: number
+  imageUrl: string
+  alt: string
+  link: string
 }
 
 export function BannerSlider() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   const banners: BannerSlide[] = [
     {
       id: 1,
-      imageUrl:
-        "https://chuyenlammaiton.com/wp-content/uploads/2022/10/banner-cua.jpg",
+      imageUrl: "https://www.quangcaophuchung.com/images/banner-new.png",
     },
     {
       id: 2,
-      imageUrl:
-        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
+      imageUrl: "https://giaconglasercnc.com/wp-content/uploads/2023/07/banner-giaconglasercnc-1.png",
     },
     {
       id: 3,
-      imageUrl:
-        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
+      imageUrl: "https://cokhiphuocbinh.com/upload/photo/untitled-10006layer-2-2929.png",
     },
     {
       id: 4,
-      imageUrl:
-        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
+      imageUrl: "https://cokhivietthang.vn/wp-content/uploads/2023/03/banner-cokhivietthang.jpg",
     },
-    {
-      id: 5,
-      imageUrl:
-        "https://noithatdailoi.com/wp-content/uploads/banner-ban-lam-viec-2a-1.png",
-    },
-  ];
+  ]
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
-  };
+    setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1))
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 5000)
+  }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
-  };
+    setCurrentSlide((prev) => (prev === 0 ? banners.length - 1 : prev - 1))
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 5000)
+  }
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
-  };
+    setCurrentSlide(index)
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 5000)
+  }
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: NodeJS.Timeout
 
     if (isAutoPlaying) {
       interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
-      }, 5000);
+        setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1))
+      }, 5000)
     }
 
     return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isAutoPlaying, banners.length]);
+      if (interval) clearInterval(interval)
+    }
+  }, [isAutoPlaying, banners.length])
 
   return (
-    <div className="banner-slider-container relative h-[180px] md:h-[235px] rounded-lg overflow-hidden">
+    <div className="banner-slider-container relative h-[180px] md:h-[335px] rounded-lg overflow-hidden">
       <div
         className="banner-slider-track flex transition-transform duration-500 ease-in-out h-full"
         style={{
@@ -85,10 +76,7 @@ export function BannerSlider() {
         }}
       >
         {banners.map((banner) => (
-          <div
-            key={banner.id}
-            className="banner-slide flex-shrink-0 w-full h-full relative"
-          >
+          <div key={banner.id} className="banner-slide flex-shrink-0 w-full h-full relative">
             <Image
               src={banner.imageUrl || "/placeholder.svg"}
               alt={banner.alt}
@@ -130,5 +118,5 @@ export function BannerSlider() {
         ))}
       </div>
     </div>
-  );
+  )
 }

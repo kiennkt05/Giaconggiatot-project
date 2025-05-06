@@ -11,27 +11,43 @@ const categories = [
   {
     id: 1,
     name: "Kệ sắt",
-    icon: "https://vinaoffice.com/images/product/vinaoffice_Product_full_19402018_094003.jpg",
-    url: "/mua-ban-lan-can-bang-sat",
+    icon: "https://i.pinimg.com/736x/c2/41/3c/c2413c1af9958f7a0c16bfa0c026219b.jpg",
   },
   {
     id: 2,
     name: "Bàn ghế khung sắt",
     icon: "https://banghecafegiare.com.vn/upload/images/ban-ghe-nha-hang-quan-nhau-khung-sat%20(2).jpg",
-    url: "/mua-ban-tui-dan-bang-tre",
   },
   {
     id: 3,
     name: "Lò nhôm",
     icon: "https://thanhluan.net/wp-content/uploads/2016/10/thung-hoa-vang.png",
-    url: "/mua-ban-dan-len-quan-ao",
   },
   {
     id: 4,
-    name: "tủ nhôm",
+    name: "Tủ nhôm",
     icon: "https://xaydungnoithat.net/wp-content/uploads/2024/11/tu-chan-bat-nhom-kinh-7.jpg",
-    url: "/mua-ban-binh-lo-gom",
   },
+  {
+    id: 5:
+    name: "Hàng rào"
+    icon: "https://i.pinimg.com/736x/81/4b/0b/814b0b7b6d855158b268b608d05a2ba6.jpg"
+  },
+  {
+    id: 6:
+    name: "Cửa sổ"
+    icon: "https://i.pinimg.com/736x/a8/ca/90/a8ca9073e5375d72d7083774bb990bbd.jpg"
+  },
+  {
+    id: 7:
+    name: "Cửa"
+    icon: "https://i.pinimg.com/736x/50/b0/6f/50b06ff72f503c18af9b2e9ac9e0dd6a.jpg"
+  },
+  {
+    id: 8:
+    name: "khung tranh"
+    icon: "https://pngimg.com/uploads/mirror/mirror_PNG17324.png"
+  }
 ]
 
 export function CategorySection() {

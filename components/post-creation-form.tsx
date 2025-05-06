@@ -151,27 +151,27 @@ export function PostCreationForm() {
                     <SelectValue placeholder="Danh mục tin đăng" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1010">Bất động sản - Căn hộ/Chung cư</SelectItem>
-                    <SelectItem value="1020">Bất động sản - Nhà ở</SelectItem>
-                    <SelectItem value="1040">Bất động sản - Đất</SelectItem>
-                    <SelectItem value="1030">Bất động sản - Văn phòng, Mặt bằng kinh doanh</SelectItem>
-                    <SelectItem value="1050">Bất động sản - Phòng trọ</SelectItem>
-                    <SelectItem value="2010">Xe cộ - Ô tô</SelectItem>
-                    <SelectItem value="2020">Xe cộ - Xe máy</SelectItem>
-                    <SelectItem value="2050">Xe cộ - Xe tải, xe ben</SelectItem>
-                    <SelectItem value="2090">Xe cộ - Xe điện</SelectItem>
-                    <SelectItem value="2060">Xe cộ - Xe đạp</SelectItem>
-                    <SelectItem value="2080">Xe cộ - Phương tiện khác</SelectItem>
-                    <SelectItem value="2030">Xe cộ - Phụ tùng xe</SelectItem>
-                    <SelectItem value="5010">Đồ điện tử - Điện thoại</SelectItem>
-                    <SelectItem value="5040">Đồ điện tử - Máy tính bảng</SelectItem>
-                    <SelectItem value="5030">Đồ điện tử - Laptop</SelectItem>
-                    <SelectItem value="5070">Đồ điện tử - Máy tính để bàn</SelectItem>
-                    <SelectItem value="5050">Đồ điện tử - Máy ảnh, Máy quay</SelectItem>
-                    <SelectItem value="5020">Đồ điện tử - Tivi, Âm thanh</SelectItem>
-                    <SelectItem value="5090">Đồ điện tử - Thiết bị đeo thông minh</SelectItem>
-                    <SelectItem value="5060">Đồ điện tử - Phụ kiện (Màn hình, Chuột...)</SelectItem>
-                    <SelectItem value="5080">Đồ điện tử - Linh kiện (RAM, Card...)</SelectItem>
+                    <SelectItem value="1010">Sắt - Lan can, cầu thang</SelectItem>
+                    <SelectItem value="1020">Sắt - Cửa, cổng</SelectItem>
+                    <SelectItem value="1030">Sắt - Khung bàn ghế</SelectItem>
+                    <SelectItem value="1040">Sắt - Giá kệ, giàn phơi</SelectItem>
+                    <SelectItem value="1050">Sắt - Khung nhà, mái tôn</SelectItem>
+                    <SelectItem value="2010">Nhôm - Cửa sổ, cửa đi</SelectItem>
+                    <SelectItem value="2020">Nhôm - Vách ngăn, tủ kệ</SelectItem>
+                    <SelectItem value="2030">Nhôm - Trần, mái che</SelectItem>
+                    <SelectItem value="2040">Nhôm - Lan can, hàng rào</SelectItem>
+                    <SelectItem value="2050">Nhôm - Khung tranh, gương</SelectItem>
+                    <SelectItem value="3010">Inox - Cầu thang, lan can</SelectItem>
+                    <SelectItem value="3020">Inox - Bàn ghế, nội thất</SelectItem>
+                    <SelectItem value="3030">Inox - Thiết bị bếp</SelectItem>
+                    <SelectItem value="3040">Inox - Cửa, cổng</SelectItem>
+                    <SelectItem value="4010">Đồng - Đồ trang trí</SelectItem>
+                    <SelectItem value="4020">Đồng - Đồ thờ cúng</SelectItem>
+                    <SelectItem value="5010">Gia công - Cắt laser, CNC</SelectItem>
+                    <SelectItem value="5020">Gia công - Hàn, uốn</SelectItem>
+                    <SelectItem value="5030">Gia công - Sơn, mạ</SelectItem>
+                    <SelectItem value="5040">Gia công - Đúc, đột dập</SelectItem>
+                    <SelectItem value="6010">Vật tư - Phụ kiện, linh kiện</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
