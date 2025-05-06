@@ -1,20 +1,32 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export function useFeatureNotification() {
+  // Initialize with default values
   const [showNotification, setShowNotification] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+
+  // Only run client-side effects after component mounts
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const showFeatureNotification = () => {
-    setShowNotification(true)
+    if (isClient) {
+      setShowNotification(true)
+    }
   }
 
   const hideFeatureNotification = () => {
-    setShowNotification(false)
+    if (isClient) {
+      setShowNotification(false)
+    }
   }
 
+  // Return safe values for server-side rendering
   return {
-    showNotification,
+    showNotification: isClient ? showNotification : false,
     showFeatureNotification,
     hideFeatureNotification,
   }

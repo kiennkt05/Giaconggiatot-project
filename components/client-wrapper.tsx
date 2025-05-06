@@ -11,19 +11,14 @@ interface ClientWrapperProps {
 
 export function ClientWrapper({ children }: ClientWrapperProps) {
   const [showNotification, setShowNotification] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
-  const showFeatureNotification = () => {
-    setShowNotification(true)
-  }
-
-  const hideFeatureNotification = () => {
-    setShowNotification(false)
-  }
-
-  // Expose the notification functions to the window object
   useEffect(() => {
+    setIsClient(true)
+
+    // Expose the notification functions to the window object
     if (typeof window !== "undefined") {
-      window.showFeatureNotification = showFeatureNotification
+      window.showFeatureNotification = () => setShowNotification(true)
     }
 
     return () => {
@@ -33,10 +28,16 @@ export function ClientWrapper({ children }: ClientWrapperProps) {
     }
   }, [])
 
+  const hideFeatureNotification = () => {
+    if (isClient) {
+      setShowNotification(false)
+    }
+  }
+
   return (
     <>
       {children}
-      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
+      {isClient && <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />}
     </>
   )
 }

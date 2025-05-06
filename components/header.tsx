@@ -2,10 +2,9 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Search, MessageSquare, User } from "lucide-react"
 import { LocationDropdown } from "@/components/location-dropdown"
@@ -16,7 +15,14 @@ import { ShoppingTab } from "@/components/shopping-tab"
 // Update the Header component to use usePathname
 export function Header() {
   const [selectedCity, setSelectedCity] = useState("Toàn Quốc")
-  const pathname = usePathname()
+  const [pathname, setPathname] = useState("/")
+  const [isClient, setIsClient] = useState(false)
+
+  // Use useEffect to safely access browser APIs
+  useEffect(() => {
+    setIsClient(true)
+    setPathname(window.location.pathname)
+  }, [])
 
   const handleUtilityLinkClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -55,7 +61,9 @@ export function Header() {
               <span className="header-logo-text font-bold text-lg hidden md:inline-block">GiaCongGiaTot</span>
             </Link>
 
-            <LocationDropdown selectedCity={selectedCity} setSelectedCity={setSelectedCity} cities={cities} />
+            {isClient && (
+              <LocationDropdown selectedCity={selectedCity} setSelectedCity={setSelectedCity} cities={cities} />
+            )}
           </div>
 
           {/* Search bar */}
@@ -88,23 +96,27 @@ export function Header() {
           {/* User actions */}
           <div className="header-right flex items-center space-x-2">
             <div className="header-actions hidden md:flex items-center space-x-4">
-              <NotificationTab />
+              {isClient && (
+                <>
+                  <NotificationTab />
 
-              <Link href="/chat">
-                <Button variant="ghost" size="icon" className="header-chat-button text-gray-600">
-                  <MessageSquare className="h-5 w-5" />
-                </Button>
-              </Link>
+                  <Link href="/chat">
+                    <Button variant="ghost" size="icon" className="header-chat-button text-gray-600">
+                      <MessageSquare className="h-5 w-5" />
+                    </Button>
+                  </Link>
 
-              <FavoriteTab />
+                  <FavoriteTab />
 
-              <ShoppingTab />
+                  <ShoppingTab />
 
-              <Link href={`/supplier/${0}`}>
-                <Button variant="ghost" size="icon" className="header-profile-button text-gray-600">
-                  <User className="h-5 w-5" />
-                </Button>
-              </Link>
+                  <Link href={`/supplier/${0}`}>
+                    <Button variant="ghost" size="icon" className="header-profile-button text-gray-600">
+                      <User className="h-5 w-5" />
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
 
             <Link href="/dang-tin">

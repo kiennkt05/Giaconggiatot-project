@@ -2,6 +2,7 @@
 
 import type React from "react"
 
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -10,50 +11,64 @@ const categories = [
     id: 1,
     name: "Kệ sắt",
     icon: "https://i.pinimg.com/736x/c2/41/3c/c2413c1af9958f7a0c16bfa0c026219b.jpg",
+    url: "/kham-pha",
   },
   {
     id: 2,
     name: "Bàn ghế khung sắt",
     icon: "https://banghecafegiare.com.vn/upload/images/ban-ghe-nha-hang-quan-nhau-khung-sat%20(2).jpg",
+    url: "/kham-pha",
   },
   {
     id: 3,
     name: "Lò nhôm",
     icon: "https://thanhluan.net/wp-content/uploads/2016/10/thung-hoa-vang.png",
+    url: "/kham-pha",
   },
   {
     id: 4,
     name: "Tủ nhôm",
     icon: "https://xaydungnoithat.net/wp-content/uploads/2024/11/tu-chan-bat-nhom-kinh-7.jpg",
+    url: "/kham-pha",
   },
   {
     id: 5,
     name: "Hàng rào",
     icon: "https://i.pinimg.com/736x/81/4b/0b/814b0b7b6d855158b268b608d05a2ba6.jpg",
+    url: "/kham-pha",
   },
   {
     id: 6,
     name: "Cửa sổ",
     icon: "https://i.pinimg.com/736x/a8/ca/90/a8ca9073e5375d72d7083774bb990bbd.jpg",
+    url: "/kham-pha",
   },
   {
     id: 7,
     name: "Cửa",
     icon: "https://i.pinimg.com/736x/50/b0/6f/50b06ff72f503c18af9b2e9ac9e0dd6a.jpg",
+    url: "/kham-pha",
   },
   {
     id: 8,
     name: "khung tranh",
     icon: "https://pngimg.com/uploads/mirror/mirror_PNG17324.png",
+    url: "/kham-pha",
   },
 ]
 
 export function CategorySection() {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const handleCategoryClick = (e: React.MouseEvent, category: (typeof categories)[0]) => {
     // Only show notification for categories that aren't implemented yet
     if (category.url !== "/kham-pha") {
       e.preventDefault()
-      if (typeof window !== "undefined" && window.showFeatureNotification) {
+      if (isClient && typeof window !== "undefined" && window.showFeatureNotification) {
         window.showFeatureNotification()
       }
     }
@@ -67,9 +82,9 @@ export function CategorySection() {
           {categories.map((category) => (
             <Link
               key={category.id}
-              href={category.url}
+              href={category.url || "/kham-pha"}
               className="category-item flex flex-col items-center justify-center text-center hover:text-orange-500 transition-colors"
-              onClick={(e) => handleCategoryClick(e, category)}
+              onClick={(e) => isClient && handleCategoryClick(e, category)}
             >
               <div className="category-icon-wrapper w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-2">
                 <Image
