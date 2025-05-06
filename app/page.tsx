@@ -14,14 +14,21 @@ import { GridLayout } from "@/components/grid-layout"
 import { getProductsByIds } from "@/services/product-service"
 
 export default function Home() {
-  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
+  // Initialize the notification hook safely
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification() || {
+    showNotification: false,
+    showFeatureNotification: () => {},
+    hideFeatureNotification: () => {},
+  }
 
   // Get products with IDs 1-8 for the homepage
   const products = getProductsByIds([1, 2, 3, 4, 5, 6, 7, 8])
 
   const handleButtonClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    showFeatureNotification()
+    if (showFeatureNotification) {
+      showFeatureNotification()
+    }
   }
 
   return (
@@ -62,7 +69,9 @@ export default function Home() {
       </main>
 
       <Footer />
-      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
+      {typeof showNotification === "boolean" && (
+        <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
+      )}
     </div>
   )
 }

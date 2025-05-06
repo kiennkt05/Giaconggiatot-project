@@ -12,14 +12,21 @@ import { GridLayout } from "@/components/grid-layout"
 import { getProductsByIds } from "@/services/product-service"
 
 export default function KhamPha() {
-  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification()
+  // Initialize the notification hook safely
+  const { showNotification, showFeatureNotification, hideFeatureNotification } = useFeatureNotification() || {
+    showNotification: false,
+    showFeatureNotification: () => {},
+    hideFeatureNotification: () => {},
+  }
 
   // Get products with IDs 9-16 for the Khám phá page
   const products = getProductsByIds([9, 10, 11, 12, 13, 14, 15, 16])
 
   const handleButtonClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    showFeatureNotification()
+    if (showFeatureNotification) {
+      showFeatureNotification()
+    }
   }
 
   return (
@@ -50,7 +57,9 @@ export default function KhamPha() {
       </main>
 
       <Footer />
-      <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
+      {typeof showNotification === "boolean" && (
+        <FeatureNotification show={showNotification} onClose={hideFeatureNotification} />
+      )}
     </div>
   )
 }
